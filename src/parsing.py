@@ -1,14 +1,17 @@
 import re
 
+
 class Symbol(str):
     def __str__(self):
         return super(Symbol, self).__str__()
     def __repr__(self):
         return self.__str__()
 
+
 def Sym(s, symbol_table={}):
     symbol_table[s] = Symbol(s)
     return symbol_table[s]
+
 
 def atom(tok):
     booleans = {"#t":True, "#f":False, "#n":None}
@@ -26,6 +29,7 @@ def atom(tok):
 def tokenize(_str):
     _str = _str.replace("(", " ( ").replace(")", " ) ").replace("\"", " \" ")
     return _str.split()
+
 
 def read(tokens):
     if not tokens:
@@ -47,6 +51,7 @@ def read(tokens):
         raise SyntaxError("Unexpected )")
     else:
         return atom(t)
+
 
 def parse(_str):
     return read(tokenize(_str))

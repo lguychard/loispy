@@ -1,6 +1,7 @@
 import operator as op
 import sys
 
+
 class Environment(dict):
 
     def __init__(self, _vars={}, outer=None):
@@ -18,8 +19,10 @@ class Environment(dict):
     def set(self, var, val):
         self[var] = val
 
+
 def make_global_env():
     return Environment(native)
+
 
 native = {
     "#t": True,
