@@ -22,13 +22,19 @@ def atom(tok):
         return Sym(tok)
 
 def tokenize(_str):
-    _str = _str.replace("(", " ( ").replace(")", " ) ")
+    _str = _str.replace("(", " ( ").replace(")", " ) ").replace("\"", " \" ")
     return _str.split()
 
 def read(tokens):
     if not tokens:
         raise SyntaxError("Unexpected EOF while reading")
     t = tokens.pop(0)
+    if "\"" == t:
+        L = []
+        while tokens[0] != "\"":
+            L.append(tokens.pop(0))
+        tokens.pop(0)
+        return " ".join(L)
     if "(" == t:
         L = []
         while tokens[0] != ")":

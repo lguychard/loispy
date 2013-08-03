@@ -1,4 +1,5 @@
 import operator as op
+import sys
 
 class Environment(dict):
 
@@ -14,17 +15,25 @@ class Environment(dict):
         else:
             return self.outer.find(var)
 
+    def set(self, var, val):
+        self[var] = val
 
-native_procs = {
-    "*": op.mul,
-    "+": op.add,
+def make_global_env():
+    return Environment(native)
+
+native = {
+    "#t": True,
+    "#f": False,
+    "#n": None,
+    "*": lambda *args: reduce(op.mul, args),
+    "+": lambda *args: reduce(op.add, args),
     "=": op.eq,
     "eq?": op.eq,
     "!=": op.__ne__,
-    "/": op.div,
+    "/": lambda *args: reduce(op.div, args),
     "not": op.not_,
-    "or": any,
-    "and": all,
+    "or": lambda *args: any(args),
+    "and": lambda *args: all(args),
     "max": max,
     "min": min,
     "map": map,
@@ -32,8 +41,16 @@ native_procs = {
     "filter": filter,
     "proc?": op.isCallable,
     "cons": lambda x, y: [x] + y,
-    "list": lambda *args: list(args)
+    "exit": lambda: sys.exit(0),
+    "range": range,
+    "true?": lambda x: x == True,
+    "false?": lambda x: not x,
+    "empty?": lambda x: not len(x),
+    "null?": lambda x: x is None,
+    "nth": lambda obj, idx: obj[idx],
+    "last": lambda obj: obj[-1],
+    "first": lambda obj: obj[0],
+    "list": lambda *args: list(args),
+    "car": lambda x: x[0],
+    "cdr": lambda x: x[1:]
 }
-
-def make_global_env():
-    return Environment(native_procs)
