@@ -4,12 +4,48 @@
 		"selected_items":
 		[
 			[
-				"for",
-				"for	for (…) {…}"
+				"apply",
+				"apply_proc(env)	(local, function)"
+			],
+			[
+				"analyze",
+				"analyze_sequence(seq)	(global, function)"
+			],
+			[
+				"set",
+				"set_var(env)	(local, function)"
+			],
+			[
+				"Sym",
+				"Symbol"
+			],
+			[
+				"Key",
+				"KeyboardInterrupt	(builtin, class)"
+			],
+			[
+				"analy",
+				"analyze_sequence(seq)	(global, function)"
+			],
+			[
+				"analyz",
+				"analyze_if(exp)	(global, function)"
+			],
+			[
+				"nOt",
+				"NotImplementedError"
+			],
+			[
+				"Not",
+				"NotImplementedError	(builtin, class)"
 			],
 			[
 				"token",
-				"token_list"
+				"tokenize(str)	(global, function)"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
 			],
 			[
 				"toki",
@@ -287,13 +323,97 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/loispylib/parsing.py",
+			"settings":
+			{
+				"buffer_size": 1188,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispylib/environment.py",
+			"settings":
+			{
+				"buffer_size": 1375,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispylib/utils.py",
+			"settings":
+			{
+				"buffer_size": 348,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispylib/main.py",
+			"settings":
+			{
+				"buffer_size": 1025,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bin/loispy",
+			"settings":
+			{
+				"buffer_size": 38,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispylib/analysis.py",
+			"settings":
+			{
+				"buffer_size": 3080,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispylib/procedure.py",
+			"settings":
+			{
+				"buffer_size": 728,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispylib/debug.py",
+			"settings":
+			{
+				"buffer_size": 242,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispylib/__init__.py",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 299,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 54.0,
+		"height": 201.0,
 		"selected_items":
 		[
+			[
+				"bas",
+				"Set Syntax: Shell Script (Bash)"
+			],
 			[
 				"syntax plain",
 				"Set Syntax: Plain Text"
@@ -347,7 +467,7 @@
 				"Code Folding: Unfold All"
 			]
 		],
-		"width": 467.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -364,6 +484,13 @@
 	},
 	"file_history":
 	[
+		"/home/loic/repositories/loispy/LICENSE.txt",
+		"/home/loic/repositories/loispy/src/loispylib/test/__init__.py",
+		"/home/loic/repositories/loispy/bin/losipy",
+		"/home/loic/repositories/loispy/src/loispylib/repl.py",
+		"/home/loic/repositories/loispy/src/loispylib/test/test_parsing.py",
+		"/home/loic/repositories/loispy/src/loispylib/analysis.py",
+		"/home/loic/repositories/loispy/src/loispylib/parsing.py",
 		"/home/loic/repositories/cscheme/cscheme.c",
 		"/home/loic/Dropbox/Loic/Schoffee/coffee/02__parsing.litcoffee",
 		"/home/loic/Dropbox/Loic/Schoffee/coffee/04__primitives.litcoffee",
@@ -484,10 +611,7 @@
 		"/Users/loic/Downloads/rotating-slideshow/js/script.js",
 		"/Users/loic/Documents/OmegaT_2.3.0_05_Source/src/org/omegat/filters3/xml/rdfxml/RdfxmlDialect.java",
 		"/Users/loic/Desktop/mo",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/corpus/musicontology.rdfs",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/untitled.xml",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/style.xsl",
-		"/Users/loic/Downloads/musicontology (3).rdfs"
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/corpus/musicontology.rdfs"
 	],
 	"find":
 	{
@@ -505,6 +629,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\n        ",
+			"find",
+			"neq",
 			"Environment.prototype",
 			"        console\\.log.*arguments\\n",
 			"\\W(\\w+)\\s?= (\\((\\w+\\s?,?)+\\)\\s?->)(\\n        |\\s)",
@@ -604,8 +731,279 @@
 	"groups":
 	[
 		{
+			"selected": 9,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/loispylib/parsing.py",
+					"settings":
+					{
+						"buffer_size": 1188,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1044,
+								1044
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/loispylib/environment.py",
+					"settings":
+					{
+						"buffer_size": 1375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								439,
+								439
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/loispylib/utils.py",
+					"settings":
+					{
+						"buffer_size": 348,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								334,
+								334
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/loispylib/main.py",
+					"settings":
+					{
+						"buffer_size": 1025,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								643,
+								643
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "bin/loispy",
+					"settings":
+					{
+						"buffer_size": 38,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								37,
+								37
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/loispylib/analysis.py",
+					"settings":
+					{
+						"buffer_size": 3080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								925,
+								925
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 102.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/loispylib/procedure.py",
+					"settings":
+					{
+						"buffer_size": 728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								289,
+								289
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/loispylib/debug.py",
+					"settings":
+					{
+						"buffer_size": 242,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								242,
+								242
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/loispylib/__init__.py",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 299,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								299,
+								299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -642,7 +1040,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 171.0
+		"height": 197.0
 	},
 	"replace":
 	{
