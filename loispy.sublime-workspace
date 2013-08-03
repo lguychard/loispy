@@ -1,0 +1,682 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"token",
+				"token_list"
+			],
+			[
+				"toki",
+				"token_list"
+			],
+			[
+				"Pair",
+				"PairElement"
+			],
+			[
+				"Pai",
+				"PairElement"
+			],
+			[
+				"Pa",
+				"PairElement"
+			],
+			[
+				"pair",
+				"pair_element"
+			],
+			[
+				"bindin",
+				"binding_env"
+			],
+			[
+				"proc",
+				"procedure_body"
+			],
+			[
+				"proced",
+				"procedure_parameters"
+			],
+			[
+				"ta",
+				"is_tagged_list"
+			],
+			[
+				"is_c",
+				"is_compound_procedure"
+			],
+			[
+				"pro",
+				"procedure"
+			],
+			[
+				"g",
+				"global_environment"
+			],
+			[
+				"is",
+				"is_pair"
+			],
+			[
+				"read",
+				"read_from"
+			],
+			[
+				"page",
+				"PageExpr"
+			],
+			[
+				"comment",
+				"commentsLength"
+			],
+			[
+				"_",
+				"_phantom"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"if",
+				"if	if"
+			],
+			[
+				"or",
+				"orderHandler"
+			],
+			[
+				"fu",
+				"fun	Function"
+			],
+			[
+				"order",
+				"OrderHandler"
+			],
+			[
+				"prod",
+				"productName"
+			],
+			[
+				"produ",
+				"productName"
+			],
+			[
+				"pr",
+				"product_price"
+			],
+			[
+				"result",
+				"result_price"
+			],
+			[
+				"search",
+				"search_form"
+			],
+			[
+				"step",
+				"stepIndex"
+			],
+			[
+				"hand",
+				"handle_message"
+			],
+			[
+				"conn",
+				"connection"
+			],
+			[
+				"tag",
+				"tag_collection"
+			],
+			[
+				"v",
+				"VocabProvider"
+			],
+			[
+				"get",
+				"getCollection"
+			],
+			[
+				"article",
+				"article_collection"
+			],
+			[
+				"sentence",
+				"sentence_count"
+			],
+			[
+				"sente",
+				"sentence_count"
+			],
+			[
+				"word",
+				"wordcount"
+			],
+			[
+				"tokenize_",
+				"tokenize_text"
+			],
+			[
+				"toke",
+				"tokenize_logger"
+			],
+			[
+				"levens",
+				"levenshtein_logger"
+			],
+			[
+				"purr",
+				"purr_main_logger"
+			],
+			[
+				"levn",
+				"levenshtein_match"
+			],
+			[
+				"levensh",
+				"levenshtein_match"
+			],
+			[
+				"leven",
+				"levenshtein_logger"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"list-st",
+				"list-style-type"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"con",
+				"confFile"
+			],
+			[
+				"__",
+				"__main___"
+			],
+			[
+				"busines",
+				"business_element"
+			],
+			[
+				"declare",
+				"declare	order"
+			],
+			[
+				"wordListt",
+				"wordListThree"
+			],
+			[
+				"wor",
+				"wordListTwo"
+			],
+			[
+				"wordL",
+				"wordListOne"
+			],
+			[
+				"wordli",
+				"wordListThree"
+			],
+			[
+				"wordl",
+				"wordListTwo"
+			],
+			[
+				"worl",
+				"wordListTwo"
+			],
+			[
+				"rand",
+				"random"
+			],
+			[
+				"wordList",
+				"wordListTwo"
+			],
+			[
+				"beer",
+				"beerNum"
+			],
+			[
+				"las",
+				"laser_weapon_armory"
+			],
+			[
+				"central",
+				"central_corridor"
+			],
+			[
+				"gold",
+				"gold_room"
+			],
+			[
+				"sphinx",
+				"sphinx_moved"
+			],
+			[
+				"player",
+				"players_name"
+			],
+			[
+				"bear",
+				"bear_room"
+			],
+			[
+				"start",
+				"start_point"
+			],
+			[
+				"KWT",
+				"KWTextConditionElement"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 54.0,
+		"selected_items":
+		[
+			[
+				"syntax plain",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"syntax javascript",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"syntax js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"syn cof",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"syntax C",
+				"Set Syntax: C"
+			],
+			[
+				"syntax coffee",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"syntax coffe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"syntax cof",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"syntax cofe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"syntax coff",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Code Folding: Unfold All"
+			],
+			[
+				"fold",
+				"Code Folding: Unfold All"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/loic/repositories/cscheme/cscheme.c",
+		"/home/loic/Dropbox/Loic/Schoffee/coffee/02__parsing.litcoffee",
+		"/home/loic/Dropbox/Loic/Schoffee/coffee/04__primitives.litcoffee",
+		"/home/loic/Dropbox/Loic/Schoffee/coffee/05__the_environment_model.litcoffee",
+		"/home/loic/Dropbox/Loic/Schoffee/coffee/test.py",
+		"/home/loic/Dropbox/Loic/Schoffee/coffee/06__repl.litcoffee",
+		"/home/loic/Dropbox/Loic/Schoffee/coffee/03__syntactic_analysis.litcoffee",
+		"/home/loic/Dropbox/Loic/Schoffee/build/js/schoffee.js",
+		"/home/loic/Dropbox/Loic/Schoffee/coffee/01__introduction.litcoffee",
+		"/home/loic/repositories/sicp/interpreter.coffee",
+		"/home/loic/Dropbox/Loic/Schoffee/Cakefile",
+		"/home/loic/Dropbox/Loic/Schoffee/Schoffee.sublime-project",
+		"/Users/loic/Dropbox/Loic/Trio_website/bootstrap.min.js",
+		"/Users/loic/Dropbox/Loic/Trio_website/kube.css",
+		"/Users/loic/Dropbox/Loic/Trio_website/index.html",
+		"/Users/loic/Dropbox/Loic/test_booleano/app.py",
+		"/Users/loic/Dropbox/Loic/test_booleano/templates/index.html",
+		"/Users/loic/Dropbox/Loic/test_booleano/QueryManager.py",
+		"/Users/loic/Dropbox/Loic/formsapp/formserve.py",
+		"/Users/loic/Dropbox/Loic/formsapp/LexicalFieldManager.py",
+		"/Users/loic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/loic/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/loic/repositories/phantombuyer/NavigationController.js",
+		"/Users/loic/repositories/phantombuyer/OrderHandler.js",
+		"/Users/loic/repositories/phantombuyer/phantombuyer.js",
+		"/Users/loic/repositories/phantombuyer/amazon-selectors.js",
+		"/Users/loic/repositories/Purr/purr/main.py",
+		"/Users/loic/repositories/Purr/purr/core/__init__.py",
+		"/Users/loic/repositories/phantombuyer/jquery-1.8.3.min.js",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/tex/redacted.tex",
+		"/Users/loic/repositories/my-website/src/static/app.py",
+		"/Users/loic/repositories/Purr/purr/core/processing/__init__.py",
+		"/Users/loic/repositories/Purr/purr/core/preprocessing.py",
+		"/Users/loic/repositories/Purr/purr/purr_logger.py",
+		"/Users/loic/repositories/Purr/purr/purr.log",
+		"/Users/loic/repositories/Purr/purr/logging.py",
+		"/Users/loic/repositories/Purr/purr/__init__.py",
+		"/Users/loic/repositories/Purr/purr/logging/__init__.py",
+		"/Users/loic/repositories/Purr/purr/core/matching/__init__.py",
+		"/Users/loic/repositories/Purr/purr/gui/__init__.py",
+		"/Users/loic/repositories/Purr/bin/purr",
+		"/Users/loic/repositories/Purr/Purr.sublime-project",
+		"/Users/loic/repositories/Purr/purr/gui/PurrMainWindow.py",
+		"/home/loic/repositories/Purr/purr/core/matching/levenshtein.py",
+		"/home/loic/repositories/Purr/purr/logging/logger.py",
+		"/home/loic/Purr/purr/exception/__init__.py",
+		"/home/loic/Purr/purr/logging/__init__.py",
+		"/home/loic/Purr/purr/core/matching/levenshtein",
+		"/home/loic/Purr/purr/core/matching/__init__.py",
+		"/home/loic/Purr/purr/core/__init__.py",
+		"/home/loic/Purr/.gitignore",
+		"/home/loic/Dropbox/Loic/Purr/app.py",
+		"/home/loic/Dropbox/Loic/Purr/static/css/translationview.css",
+		"/home/loic/Dropbox/Loic/Purr/templates/main.html",
+		"/Users/loic/python/Purr/static/css/kube.css",
+		"/Users/loic/python/Purr/static/grapher.js",
+		"/Users/loic/python/graph/templates/main.html",
+		"/Users/loic/python/graph/app.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/soutenance.txt",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/mytest.py",
+		"/Users/loic/Documents/testquito/marco.html",
+		"/Users/loic/Documents/testquito/marco_files/style.css",
+		"/Users/loic/Dropbox/T3L 2011-2012/java/untitled.java",
+		"/Users/loic/Dropbox/T3L 2011-2012/java/PhraseOMatic.java",
+		"/Volumes/MUSIC/Uni Backups/T3L 2010-2011/TA_TAO/THE_UNIVERSAL_DECLARATION_OF_HUMAN_RIGHTS_GUYCHARD.tmx",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex42.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/testargv",
+		"/Users/loic/Documents/dev/html/style.css",
+		"/Users/loic/Documents/workspace/playingWithClasses/untitled.tex",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/printMyName.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/java/beersong.java",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/beersong.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/phraseomatic.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/tiddlylisp.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/xqtest.xq",
+		"/Users/loic/Dropbox/T3L 2011-2012/xq.xq",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/notlispy.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/numericBooleans.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ifStatement.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/assignmentOperator.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/chainingAssignments.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/augmentedAssignment.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/pythonFalseValues",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/multipleAssignment.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/augmentedAssignment",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex36.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex39.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex40.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex41.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex35.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/test.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/33.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex34.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex24.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex25.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex26.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex29.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex30.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex31.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex32.py",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo_rdfToXml.xsl",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/datatype_source.html",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/functionalproperties_cible.html",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo_xmlToHtml.xsl",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo-source.xml",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/classes.html",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo-cible.xml",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/classes_cible.html",
+		"/Users/loic/Documents/dev/python/ex1.py",
+		"/Users/loic/Documents/dev/python/ex2.py",
+		"/Users/loic/Desktop/xsd_test/FormSignatures.xml",
+		"/Users/loic/Desktop/xsd_test/untitledform.xml",
+		"/Users/loic/Dropbox/T3L 2011-2012/stage/xsd/untitled.xml",
+		"/Users/loic/Dropbox/T3L 2011-2012/stage/xsd/untitled.xsd",
+		"/Users/loic/Library/Application Support/Sublime Text 2/Packages/User/Global.sublime-settings",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/musicontology.rdfs",
+		"/Users/loic/Downloads/rotating-slideshow/index.html",
+		"/Users/loic/Downloads/rotating-slideshow/js/script.js",
+		"/Users/loic/Documents/OmegaT_2.3.0_05_Source/src/org/omegat/filters3/xml/rdfxml/RdfxmlDialect.java",
+		"/Users/loic/Desktop/mo",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/corpus/musicontology.rdfs",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/untitled.xml",
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/style.xsl",
+		"/Users/loic/Downloads/musicontology (3).rdfs"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Environment.prototype",
+			"        console\\.log.*arguments\\n",
+			"\\W(\\w+)\\s?= (\\((\\w+\\s?,?)+\\)\\s?->)(\\n        |\\s)",
+			" is_definition = (exp) -> ",
+			"\\W(\\w+)\\s?= (\\((\\w+\\s?,?)+\\)\\s?->)(\\n        |\\s)",
+			"arguments",
+			"\\W(\\w+)\\s?= (\\((\\w+\\s?,?)+\\)\\s?->)(\\n        |\\s)",
+			".apply(",
+			".apply",
+			"extend",
+			"new Env",
+			"make_procedure",
+			"analyze_definition",
+			"analyze_defintion",
+			"is_primitive",
+			"outer",
+			"apply_primitive",
+			"procedure_parameters",
+			"is_application",
+			"is_pair",
+			"is_application",
+			"procedure",
+			"is_pair",
+			"is_application",
+			"symbol",
+			"is_pair",
+			"false",
+			"tru",
+			"true",
+			"true?",
+			"self",
+			"bootstrap",
+			"tabbable",
+			"\\s+=",
+			"\\t",
+			"));\n",
+			"red",
+			"base",
+			"'',\n",
+			"body",
+			"mo:singer",
+			"opéra bastille",
+			"config",
+			"35",
+			"cross-cultura",
+			"g",
+			"enriching ontologies",
+			"KWDataList",
+			"KWDataItem",
+			"searchforma",
+			"mustbeat",
+			"animated",
+			"dc:title",
+			"releasetype",
+			"dc:title",
+			"morceau",
+			"dc:title",
+			"&",
+			"&quot;",
+			"ISRC",
+			"mo:isrc",
+			"\"?>",
+			"br",
+			"http",
+			"deprecated",
+			"téléchargement",
+			"</td>",
+			"<td>",
+			"h4",
+			"release_of",
+			"type"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"this",
+			"",
+			" \\1 = \\2\\n        console.log \"\\1\", arguments\\n        ",
+			" \\1 = \\2\\n        console.log \"\\1\", arguments\\n         ",
+			" \\1 = \\2\\n        console.log \"\\1\", \"\\2\"\\n         ",
+			" \\1 = \\2\\n        console.log \"\\1\" + \"\\2\"\\n         ",
+			" \\1 = \\2\\n        console.log \\1 + \\2\\n         ",
+			" =",
+			" ",
+			"    ",
+			"\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 171.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"prmitive",
+				"coffee/04__primitives.litcoffee"
+			],
+			[
+				"",
+				"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/tex/biblio.bib"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 192.0,
+	"status_bar_visible": true
+}
