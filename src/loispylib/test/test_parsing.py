@@ -29,7 +29,8 @@ def run_tests():
             failed += 1
         print t[0], " => ", out, " --- ", res
     print "\n-------------------------\n"
-    print "ran %d tests, %d failed" % (len(tests), failed)
+    print "ran %d tests, %d failed, %d successful" % (
+            len(tests), failed, len(tests) - failed)
 
 if __name__ == "__main__":
     run_tests()

@@ -1,12 +1,10 @@
 import re
 
 class Symbol(str):
-
     def __str__(self):
-        return "Sym(%s)" % super(Symbol, self).__str__()
-
+        return super(Symbol, self).__str__()
     def __repr__(self):
-        return __str__(self)
+        return self.__str__()
 
 def Sym(s, symbol_table={}):
     symbol_table[s] = Symbol(s)
@@ -28,17 +26,16 @@ def tokenize(_str):
     return _str.split()
 
 def read(tokens):
-    print tokens
     if not tokens:
         raise SyntaxError("Unexpected EOF while reading")
-    t = tokens.pop()
+    t = tokens.pop(0)
     if "(" == t:
         L = []
         while tokens[0] != ")":
             L.append(read(tokens))
-        tokens.pop()
+        tokens.pop(0)
         return L
-    elif ")" ==t:
+    elif ")" == t:
         raise SyntaxError("Unexpected )")
     else:
         return atom(t)
