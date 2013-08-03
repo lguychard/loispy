@@ -21,6 +21,8 @@ def atom(tok):
     else:
         return Sym(tok)
 
+# TODO: rewrite read & tokenize so that they're not shit
+
 def tokenize(_str):
     _str = _str.replace("(", " ( ").replace(")", " ) ").replace("\"", " \" ")
     return _str.split()

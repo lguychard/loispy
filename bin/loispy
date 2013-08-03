@@ -1,1 +1,1 @@
-python ./../src/loispylib/main.py "$@"
+python ./../src/main.py "$@"
