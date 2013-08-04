@@ -4,5 +4,14 @@
 		{
 			"path": "/home/loic/repositories/loispy"
 		}
-	]
+	],
+    "build_systems":
+    [
+        {
+            "name": "loispy",
+            "selector": "source.loisp",
+            "cmd": "$project_path/bin/loispy $file -d",
+            "shell": true
+        }
+    ]
 }

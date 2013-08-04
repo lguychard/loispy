@@ -54,4 +54,7 @@ def read(tokens):
 
 
 def parse(_str):
-    return read(tokenize(_str))
+    tokens, exps = tokenize(_str), []
+    while tokens:
+        exps.append(read(tokens))
+    return exps

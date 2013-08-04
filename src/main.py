@@ -5,25 +5,36 @@ import sys
 import traceback
 from utils import to_string
 from argparse import ArgumentParser
+from collections import Counter
 
 
-def _exec(_str, env):
-    return analyze(parse(_str))(env)
+def _eval(_str, env):
+    return [analyze(e)(env) for e in parse(_str)]
 
 
-def repl(env):
+def repl(env, debug=False):
     # TODO: multiline, nicer REPL. Tab-completion
     def ask():
         try:
             _str = raw_input("=> ")
+            c = Counter(_str)
+            paren_match = c["("] == c[")"] and c["\""] % 2 == 0
+            while not paren_match:
+                _str += raw_input(".. ")
+                c = Counter(_str)
+                paren_match = c["("] == c[")"] and c["\""] % 2 == 0
         except KeyboardInterrupt:
             print "bye"
             sys.exit(0)
         try:
-            val = _exec(_str, env)
+            val = _eval(_str, env)
+            if len(val) != 1:
+                raise Exception("Expected 1 return value, got %d" % len(val))
+            val = val.pop()
         except Exception as e:
-            val = "%s: %s" % (type(e).__name__, str(e))
-            print traceback.format_exc()
+            val = e
+            if debug:
+                print traceback.format_exc()
         if val is not None:
             print to_string(val)
     print "===============\nlois.py v.0.0.1\n==============="
@@ -33,7 +44,15 @@ def repl(env):
 
 def run_file(f, env):
     with open(f, "r") as _file:
-        print _exec(_file.read(), env)
+        for exp in parse(_file.read()):
+            val = analyze(exp)(env)
+            if val is not None:
+                print val
+
+def load_file(f, env):
+    with open(f, "r") as _file:
+        for exp in parse(_file.read()):
+            analyze(exp)(env)
 
 
 def make_argparser():
@@ -50,11 +69,11 @@ def main():
     args = make_argparser().parse_args()
     env = make_global_env()
     for f in args.load:
-        run_file(f, env)
+        load_file(f, env)
     if not args.file:
-        repl(env, args.debug)
+        repl(env)
     else:
-        run_file(args.file, env)
+        print run_file(args.file, env)
 
 
 if __name__ == "__main__":

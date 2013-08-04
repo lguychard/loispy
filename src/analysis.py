@@ -1,6 +1,7 @@
 from parsing import Symbol, Sym
 from environment import Environment
 from procedure import Procedure
+import sys
 
 
 def analyze(exp):
@@ -12,8 +13,14 @@ def analyze(exp):
         elif is_let(exp): return analyze_let(exp)
         elif is_lambda(exp): return analyze_lambda(exp)
         elif is_def(exp): return analyze_def(exp)
-        elif is_cond(exp): return expand_cond(exp)
+        elif is_cond(exp):
+            try:
+                return expand_cond(exp)
+            except IndexError:
+                print exp
+                exit(1)
         elif is_quoted(exp): return quotation(exp)
+        elif is_getter(exp): return analyze_getter(exp)
         else:
             return analyze_procedure_application(exp)
     else:
@@ -30,6 +37,7 @@ def is_cond(exp): return is_tagged(exp, "cond")
 def is_proc_applicaton(exp): return type(exp[0]) == Symbol
 def is_lambda(exp): return is_tagged(exp, "lambda")
 def is_quoted(exp): return is_tagged(exp, "quote")
+def is_getter(exp): return type(exp[0]) == Symbol and Sym(exp[0])[0] == "."
 
 
 def analyze_begin(exp):
@@ -43,8 +51,10 @@ def analyze_if(exp):
     pred = analyze(exp[1])
     then = analyze(exp[2])
     alt = analyze(exp[3]) if len(exp) == 4 else lambda env: False
-    return lambda env: then(env) if pred(env) else alt(env)
+    return make_if(pred, then, alt)
 
+def make_if(pred, then, alt):
+    return lambda env: then(env) if pred(env) else alt(env)
 
 def analyze_let(exp):
     if not len(exp[1]) or not all([len(e) == 2 for e in exp[1]]):
@@ -84,7 +94,14 @@ def make_proc(args, body, name="lambda"):
 
 
 def expand_cond(exp):
-    raise NotImplementedError
+    first = exp.pop(0)
+    if is_tagged(exp, "else"):
+        if exp:
+            raise SyntaxError("Else clause isn't last: %s" % str(exp))
+        return analyze_sequence(first[1:])
+    else:
+        pred, then = analyze(exp[0]), analyze_sequence(exp[1:])
+        return make_if(pred, then, expand_cond(exp))
 
 
 def analyze_procedure_application(exp):
@@ -96,3 +113,18 @@ def analyze_procedure_application(exp):
 def quotation(exp):
     text_of_quotation = exp[1]
     return lambda env: text_of_quotation
+
+def analyze_getter(exp):
+    attr = Sym(exp[0])[1:]
+    obj = analyze(exp[1])
+    args = [analyze(a) for a in exp[2:]]
+    def _getattr(env):
+        try:
+            _obj = obj(env)
+            _attr = getattr(_obj, attr)
+        except AttributeError:
+            raise AttributeError("%s '%s' has no field '%s'" % (
+                                type(_obj).__name__, _obj, attr))
+        if hasattr(_attr, "__call__"): return _attr(*[a(env) for a in args])
+        return _attr
+    return _getattr

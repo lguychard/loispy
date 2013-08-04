@@ -1,6 +1,5 @@
 from environment import Environment
 
-
 class Procedure(object):
 
     __slots__ = ["env", "args", "body", "numargs", "name"]
@@ -24,3 +23,4 @@ class Procedure(object):
 
     def __repr__(self):
         return self.__str__()
+
