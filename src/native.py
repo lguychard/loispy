@@ -34,9 +34,10 @@ class natproc(object):
         self.aliases = aliases
 
     def __call__(self, func):
-        proc = type(func.__name__, (NativeProcedure,), {"__call__": func})()
-        native[func.__name__] = proc
-        for a in self.aliases:
+        procname = self.aliases[0] if self.aliases else func.__name__
+        proc = type(procname, (NativeProcedure,), {"__call__": func})()
+        native[procname] = proc
+        for a in self.aliases[1:]:
             native[a] = proc
 
 
@@ -45,20 +46,24 @@ class natproc(object):
 # NATIVE PROCEDURE DEFINITIONS
 #-----------------------------
 
+natproc()(min)
+natproc()(max)
+natproc()(range)
+natproc()(map)
+natproc()(reduce)
+natproc()(filter)
+natproc("proc?")(op.isCallable)
+natproc()(sys.exit)
 
 @natproc
 def error(msg=""):
     raise Error(msg)
 
-@natproc
-def exit(code=0):
-    sys.exit(code)
-
 @natproc("*")
 def multiply(self, *args):
     return reduce(op.mul, args)
 
-@natproc("=", "eq?")
+@natproc("eq?", "=")
 def equals(self, *args):
     return op.eq(*args)
 
@@ -66,7 +71,7 @@ def equals(self, *args):
 def substract(self, *args):
     return reduce(op.sub, args)
 
-@natproc("!=", "neq?")
+@natproc("neq?", )
 def not_equals(self, *args):
     return op.__ne__(*args)
 
@@ -90,42 +95,46 @@ def logical_and(self, *args):
 def logical_or(self, *args):
     return any(args)
 
-@natproc("max")
-def max(*args): return max(args)
+@natproc
+def cons(x, y):
+    return  [x] + y
 
+@natproc("true?")
+def is_true(x):
+    return  x == True
 
-# native = {
-#     "#t": True,
-#     "#f": False,
-#     "#n": None,
-#     "*": multiply,
-#     "+": add,
-#     "=": equals,
-#     "-": substract,
-#     # "eq?": op.eq,
-#     "!=": not_equals,
-#     "/": divide(),
-#     "not": logical_not,
-#     "or": logical_or,
-#     "and": logical_and,
-#     "max": max,
-#     "min": min,
-#     "map": map,
-#     "reduce": reduce,
-#     "filter": filter,
-#     "proc?": op.isCallable,
-#     "cons": lambda x, y: [x] + y,
-#     "exit": exit,
-#     "range": range,
-#     "true?": lambda x: x == True,
-#     "false?": lambda x: not x,
-#     "empty?": lambda x: not len(x),
-#     "null?": lambda x: x is None,
-#     "nth": lambda obj, idx: obj[idx],
-#     "last": lambda obj: obj[-1],
-#     "first": lambda obj: obj[0],
-#     "list": lambda *args: list(args),
-#     "car": lambda x: x[0],
-#     "cdr": lambda x: x[1:],
-#     "error": error
-# }
+@natproc("false?")
+def is_false(x):
+    return  not x
+
+@natproc("empty?")
+def is_empty(x):
+    return  not len(x)
+
+@natproc("null?")
+def null(x):
+    return  x is None
+
+@natproc
+def nth(obj, idx):
+    return  obj[idx]
+
+@natproc
+def last(obj):
+    return  obj[-1]
+
+@natproc
+def first(obj):
+    return  obj[0]
+
+@natproc
+def list(*args):
+    return  list(args)
+
+@natproc
+def car(x):
+    return  x[0]
+
+@natproc
+def cdr(x):
+    return x[1:]
