@@ -1,5 +1,5 @@
 from parsing import parse
-from analysis import analyze
+from analysis import analyze, _eval
 from environment import make_global_env
 import sys
 import traceback
@@ -8,21 +8,15 @@ from argparse import ArgumentParser
 from collections import Counter
 
 
-def _eval(_str, env):
-    return [analyze(e)(env) for e in parse(_str)]
-
-
 def repl(env, debug=False):
     # TODO: multiline, nicer REPL. Tab-completion
     def ask():
         try:
             _str = raw_input("=> ")
-            c = Counter(_str)
-            paren_match = c["("] == c[")"] and c["\""] % 2 == 0
-            while not paren_match:
+            matched = paren_match(_str)
+            while not matched:
                 _str += raw_input(".. ")
-                c = Counter(_str)
-                paren_match = c["("] == c[")"] and c["\""] % 2 == 0
+                matched = paren_match(_str)
         except KeyboardInterrupt:
             print "bye"
             sys.exit(0)
@@ -42,15 +36,20 @@ def repl(env, debug=False):
         ask()
 
 
-def run_file(f, env):
-    with open(f, "r") as _file:
+def paren_match(_str):
+    c = Counter(_str)
+    return c["("] == c[")"] and c["\""] % 2 == 0
+
+
+def run(filename, env):
+    with open(filename, "r") as _file:
         for exp in parse(_file.read()):
             val = analyze(exp)(env)
             if val is not None:
                 print val
 
-def load_file(f, env):
-    with open(f, "r") as _file:
+def load(filename, env):
+    with open(filename, "r") as _file:
         for exp in parse(_file.read()):
             analyze(exp)(env)
 
@@ -69,11 +68,11 @@ def main():
     args = make_argparser().parse_args()
     env = make_global_env()
     for f in args.load:
-        load_file(f, env)
+        load(f, env)
     if not args.file:
         repl(env)
     else:
-        print run_file(args.file, env)
+        print run(args.file, env)
 
 
 if __name__ == "__main__":

@@ -7,7 +7,11 @@ import sys
 # GLOBAL NATIVE: A DICT OF BUILT-IN PROCEDURES AND CONSTANTS
 # ----------------------------------------------------------
 
-native = {}
+native = {
+    "#t": True,
+    "#f": False,
+    "#n": None
+}
 
 
 
@@ -46,14 +50,10 @@ class natproc(object):
 # NATIVE PROCEDURE DEFINITIONS
 #-----------------------------
 
-natproc()(min)
-natproc()(max)
-natproc()(range)
-natproc()(map)
-natproc()(reduce)
-natproc()(filter)
+for p in min, max, range, map, reduce, filter, sys.exit:
+    natproc()(p)
+
 natproc("proc?")(op.isCallable)
-natproc()(sys.exit)
 
 @natproc
 def error(msg=""):
@@ -97,43 +97,51 @@ def logical_or(self, *args):
 
 @natproc
 def cons(x, y):
-    return  [x] + y
+    return [x] + y
 
 @natproc("true?")
 def is_true(x):
-    return  x == True
+    return x == True
 
 @natproc("false?")
 def is_false(x):
-    return  not x
+    return not x
 
 @natproc("empty?")
 def is_empty(x):
-    return  not len(x)
+    return not len(x)
 
 @natproc("null?")
 def null(x):
-    return  x is None
+    return x is None
+
+@natproc("even?")
+def even(x):
+    return not x % 2
+
+@natproc("odd?")
+def odd(x):
+    return bool(x % 2)
 
 @natproc
 def nth(obj, idx):
-    return  obj[idx]
+    return obj[idx]
 
 @natproc
 def last(obj):
-    return  obj[-1]
+    return obj[-1]
 
 @natproc
 def first(obj):
-    return  obj[0]
+    return obj[0]
 
 @natproc
 def list(*args):
-    return  list(args)
+    return list(args)
 
 @natproc
 def car(x):
-    return  x[0]
+    return x[0]
 
 @natproc
 def cdr(x):

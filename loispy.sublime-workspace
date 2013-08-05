@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"is",
+				"isCallable"
+			],
+			[
+				"Native",
+				"NativeProcedure	(global, class)"
+			],
+			[
+				"s",
+				"substract	(global, class)"
+			],
+			[
+				"logical",
+				"logical_and	(global, class)"
+			],
+			[
+				"logic",
+				"logical_or	(global, class)"
+			],
+			[
+				"Nativ",
+				"NativeProcedure	(global, class)"
+			],
+			[
+				"Nati",
+				"NativeProcedure	(global, class)"
+			],
+			[
+				"lo",
+				"loispy"
+			],
+			[
+				"NOt",
+				"NotImplementedError	(builtin, class)"
+			],
+			[
 				"apply",
 				"apply_proc(env)	(local, function)"
 			],
@@ -94,10 +130,6 @@
 			[
 				"g",
 				"global_environment"
-			],
-			[
-				"is",
-				"is_pair"
 			],
 			[
 				"read",
@@ -324,82 +356,84 @@
 	"buffers":
 	[
 		{
-			"file": "src/loispylib/parsing.py",
+			"file": "src/environment.py",
 			"settings":
 			{
-				"buffer_size": 1188,
+				"buffer_size": 488,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/loispylib/environment.py",
+			"file": "src/new-parsing.py",
 			"settings":
 			{
-				"buffer_size": 1375,
+				"buffer_size": 925,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/loispylib/utils.py",
+			"contents": "Package Control Messages\n========================\n\nSublimeLinter:\n-------------\n\n  SublimeLinter 1.7.2 changelog\n  =============================\n  \n  CHANGES/FIXES\n  -------------\n  - Update JSHint to v2.1.8\n  - Fixing compatibility regression with latest JSHint\n  - Fixing compatibility regression with latest Pyflakes\n  - Apologizing for hasty v1.7.1 release ;)\n  \n\n  SublimeLinter 1.7.1 changelog\n  =============================\n  \n  CHANGES/FIXES\n  -------------\n  - Update JSLint to latest\n  - Update JSHint to v2.1.5\n  - Updated link to JSHint documentation\n  - Updated PEP8 to v1.4.6\n  - Updated Pyflakes to v0.7.3\n  - Gutter mark icons are now retina quality\n  - Included Gutter mark icon PSD (for tinkering :)\n  \n",
 			"settings":
 			{
-				"buffer_size": 348,
+				"buffer_size": 722,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/analysis.py",
+			"settings":
+			{
+				"buffer_size": 4246,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/loispylib/main.py",
+			"file": "loispy.sublime-project",
 			"settings":
 			{
-				"buffer_size": 1025,
+				"buffer_size": 280,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "bin/loispy",
+			"file": "src/main.py",
 			"settings":
 			{
-				"buffer_size": 38,
+				"buffer_size": 2169,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/loispylib/analysis.py",
+			"file": "src/parsing.py",
 			"settings":
 			{
-				"buffer_size": 3080,
+				"buffer_size": 1326,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/loispylib/procedure.py",
+			"file": "src/procedure.py",
 			"settings":
 			{
-				"buffer_size": 728,
+				"buffer_size": 729,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/loispylib/debug.py",
+			"file": "src/native.py",
 			"settings":
 			{
-				"buffer_size": 242,
+				"buffer_size": 2407,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/loispylib/__init__.py",
+			"file": "src/utils.py",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 299,
+				"buffer_size": 429,
 				"line_ending": "Unix"
 			}
 		}
@@ -407,9 +441,17 @@
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 201.0,
+		"height": 75.0,
 		"selected_items":
 		[
+			[
+				"syntax lisp",
+				"Set Syntax: Lisp"
+			],
+			[
+				"syntax pyth",
+				"Set Syntax: Python"
+			],
 			[
 				"bas",
 				"Set Syntax: Shell Script (Bash)"
@@ -484,13 +526,29 @@
 	},
 	"file_history":
 	[
+		"/home/loic/repositories/loispy/loispy-scripts/funcs.loisp",
+		"/home/loic/repositories/loispy/src/utils.py",
+		"/home/loic/repositories/loispy/src/native.py",
+		"/home/loic/repositories/sicp/interpreter.scm",
+		"/home/loic/repositories/loispy/src/main.py",
+		"/home/loic/repositories/loispy/src/parsing.py",
+		"/home/loic/repositories/loispy/src/procedure.py",
+		"/home/loic/repositories/loispy/src/loispylib/__init__.py",
+		"/home/loic/repositories/loispy/src/loispylib/debug.py",
+		"/home/loic/repositories/loispy/src/loispylib/procedure.py",
+		"/home/loic/repositories/loispy/src/loispylib/analysis.py",
+		"/home/loic/repositories/loispy/src/loispylib/main.py",
+		"/home/loic/repositories/loispy/src/loispylib/utils.py",
+		"/home/loic/repositories/loispy/src/loispylib/environment.py",
+		"/home/loic/repositories/loispy/src/loispylib/parsing.py",
+		"/home/loic/repositories/loispy/README.md",
+		"/home/loic/repositories/loispy/bin/loispy",
+		"/home/loic/repositories/loispy/src/test/test_parsing.py",
 		"/home/loic/repositories/loispy/LICENSE.txt",
 		"/home/loic/repositories/loispy/src/loispylib/test/__init__.py",
 		"/home/loic/repositories/loispy/bin/losipy",
 		"/home/loic/repositories/loispy/src/loispylib/repl.py",
 		"/home/loic/repositories/loispy/src/loispylib/test/test_parsing.py",
-		"/home/loic/repositories/loispy/src/loispylib/analysis.py",
-		"/home/loic/repositories/loispy/src/loispylib/parsing.py",
 		"/home/loic/repositories/cscheme/cscheme.c",
 		"/home/loic/Dropbox/Loic/Schoffee/coffee/02__parsing.litcoffee",
 		"/home/loic/Dropbox/Loic/Schoffee/coffee/04__primitives.litcoffee",
@@ -595,23 +653,7 @@
 		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/datatype_source.html",
 		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/functionalproperties_cible.html",
 		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo_xmlToHtml.xsl",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo-source.xml",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/classes.html",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo-cible.xml",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/classes_cible.html",
-		"/Users/loic/Documents/dev/python/ex1.py",
-		"/Users/loic/Documents/dev/python/ex2.py",
-		"/Users/loic/Desktop/xsd_test/FormSignatures.xml",
-		"/Users/loic/Desktop/xsd_test/untitledform.xml",
-		"/Users/loic/Dropbox/T3L 2011-2012/stage/xsd/untitled.xml",
-		"/Users/loic/Dropbox/T3L 2011-2012/stage/xsd/untitled.xsd",
-		"/Users/loic/Library/Application Support/Sublime Text 2/Packages/User/Global.sublime-settings",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/musicontology.rdfs",
-		"/Users/loic/Downloads/rotating-slideshow/index.html",
-		"/Users/loic/Downloads/rotating-slideshow/js/script.js",
-		"/Users/loic/Documents/OmegaT_2.3.0_05_Source/src/org/omegat/filters3/xml/rdfxml/RdfxmlDialect.java",
-		"/Users/loic/Desktop/mo",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/corpus/musicontology.rdfs"
+		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo-source.xml"
 	],
 	"find":
 	{
@@ -629,6 +671,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"return  ",
+			"#     \"(.+)\": lambda (.*):(.*),",
+			"class (\\w+)\\(NativeProcedure\\):\\n    def __call__(\\(.*\\)): (.*)",
+			"NativeProc",
+			"cond",
+			"cond-actions",
+			"expand_clauses",
+			"cond",
+			"analyze_if",
+			"if",
+			"cond",
+			"env",
 			"\n        ",
 			"find",
 			"neq",
@@ -710,6 +764,13 @@
 		"regex": true,
 		"replace_history":
 		[
+			"return ",
+			"@natproc\\ndef \\1(\\2):\\n    return \\3\\n",
+			"@natproc\\ndef \\1(\\2):\\n    return \\3",
+			"@natproc\\ndef \\1(\\2):\\n    \\3",
+			"@natproc\\ndef \\1\\2:\\n    \\3",
+			"@natproc\\n\\1\\2:\\n    \\3",
+			"NativeProcedure",
 			"this",
 			"",
 			" \\1 = \\2\\n        console.log \"\\1\", arguments\\n        ",
@@ -731,23 +792,23 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 8,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/loispylib/parsing.py",
+					"file": "src/environment.py",
 					"settings":
 					{
-						"buffer_size": 1188,
+						"buffer_size": 488,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1044,
-								1044
+								488,
+								488
 							]
 						],
 						"settings":
@@ -764,51 +825,54 @@
 				},
 				{
 					"buffer": 1,
-					"file": "src/loispylib/environment.py",
+					"file": "src/new-parsing.py",
 					"settings":
 					{
-						"buffer_size": 1375,
+						"buffer_size": 925,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								439,
-								439
+								48,
+								48
 							]
 						],
 						"settings":
 						{
+							"auto_name": "",
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 510.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "src/loispylib/utils.py",
 					"settings":
 					{
-						"buffer_size": 348,
+						"buffer_size": 722,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								334,
-								334
+								722,
+								722
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -818,18 +882,18 @@
 				},
 				{
 					"buffer": 3,
-					"file": "src/loispylib/main.py",
+					"file": "src/analysis.py",
 					"settings":
 					{
-						"buffer_size": 1025,
+						"buffer_size": 4246,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								643,
-								643
+								799,
+								799
 							]
 						],
 						"settings":
@@ -846,23 +910,25 @@
 				},
 				{
 					"buffer": 4,
-					"file": "bin/loispy",
+					"file": "loispy.sublime-project",
 					"settings":
 					{
-						"buffer_size": 38,
+						"buffer_size": 280,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								37,
-								37
+								213,
+								213
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -872,46 +938,18 @@
 				},
 				{
 					"buffer": 5,
-					"file": "src/loispylib/analysis.py",
+					"file": "src/main.py",
 					"settings":
 					{
-						"buffer_size": 3080,
+						"buffer_size": 2169,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								925,
-								925
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 102.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/loispylib/procedure.py",
-					"settings":
-					{
-						"buffer_size": 728,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								289,
-								289
+								61,
+								61
 							]
 						],
 						"settings":
@@ -927,24 +965,54 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "src/loispylib/debug.py",
+					"buffer": 6,
+					"file": "src/parsing.py",
 					"settings":
 					{
-						"buffer_size": 242,
+						"buffer_size": 1326,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								242,
-								242
+								1326,
+								1326
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 561.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/procedure.py",
+					"settings":
+					{
+						"buffer_size": 729,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								729,
+								729
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -954,23 +1022,25 @@
 				},
 				{
 					"buffer": 8,
-					"file": "src/loispylib/__init__.py",
+					"file": "src/native.py",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 2407,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1083,
+								1083
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -980,23 +1050,23 @@
 				},
 				{
 					"buffer": 9,
-					"file": "README.md",
+					"file": "src/utils.py",
 					"settings":
 					{
-						"buffer_size": 299,
+						"buffer_size": 429,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								299,
-								299
+								429,
+								429
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1052,6 +1122,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"utils",
+				"src/utils.py"
+			],
+			[
+				"proce",
+				"src/procedure.py"
+			],
+			[
+				"parsing",
+				"src/parsing.py"
+			],
 			[
 				"prmitive",
 				"coffee/04__primitives.litcoffee"
