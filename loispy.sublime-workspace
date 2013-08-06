@@ -385,7 +385,7 @@
 			"file": "src/analysis.py",
 			"settings":
 			{
-				"buffer_size": 4246,
+				"buffer_size": 4380,
 				"line_ending": "Unix"
 			}
 		},
@@ -401,7 +401,7 @@
 			"file": "src/main.py",
 			"settings":
 			{
-				"buffer_size": 2169,
+				"buffer_size": 2167,
 				"line_ending": "Unix"
 			}
 		},
@@ -409,7 +409,7 @@
 			"file": "src/parsing.py",
 			"settings":
 			{
-				"buffer_size": 1326,
+				"buffer_size": 1677,
 				"line_ending": "Unix"
 			}
 		},
@@ -434,6 +434,14 @@
 			"settings":
 			{
 				"buffer_size": 429,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/test/test_parsing.py",
+			"settings":
+			{
+				"buffer_size": 1345,
 				"line_ending": "Unix"
 			}
 		}
@@ -792,7 +800,7 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -847,7 +855,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 510.0,
+						"translation.y": 204.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -885,15 +893,15 @@
 					"file": "src/analysis.py",
 					"settings":
 					{
-						"buffer_size": 4246,
+						"buffer_size": 4380,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								799,
-								799
+								1889,
+								1889
 							]
 						],
 						"settings":
@@ -941,15 +949,15 @@
 					"file": "src/main.py",
 					"settings":
 					{
-						"buffer_size": 2169,
+						"buffer_size": 2167,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								61,
-								61
+								2165,
+								2165
 							]
 						],
 						"settings":
@@ -959,7 +967,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 816.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -969,15 +977,15 @@
 					"file": "src/parsing.py",
 					"settings":
 					{
-						"buffer_size": 1326,
+						"buffer_size": 1677,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1326,
-								1326
+								1159,
+								1159
 							]
 						],
 						"settings":
@@ -987,7 +995,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 561.0,
+						"translation.y": 663.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1032,8 +1040,8 @@
 						"selection":
 						[
 							[
-								1083,
-								1083
+								1720,
+								1720
 							]
 						],
 						"settings":
@@ -1043,7 +1051,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1581.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1067,6 +1075,34 @@
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/test/test_parsing.py",
+					"settings":
+					{
+						"buffer_size": 1345,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								838,
+								838
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

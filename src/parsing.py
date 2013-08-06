@@ -27,21 +27,34 @@ def atom(tok):
 # TODO: rewrite read & tokenize so that they're not shit
 
 def tokenize(_str):
-    _str = _str.replace("(", " ( ").replace(")", " ) ").replace("\"", " \" ")
-    return _str.split()
+    tokens = "(" + "|".join(["\s+", "\(", "\)", "\"", "[^\s\"\(\),@'`]+", "'", "`", ",(!?@)", ",@"]) + ")"
+    splitter = re.compile(tokens)
+    return filter(lambda s: s != "" and s is not None, splitter.split(_str))
 
+_quote, _quasiquote, _unquote, _unquotesplicing = Sym("quote"), Sym("quasiquote"), Sym("unquote"), Sym("unquote-splicing")
+
+quotes = {
+    "`": _quote,
+    "'": _quasiquote,
+    ",": _unquote,
+    ",@": _unquotesplicing}
 
 def read(tokens):
     if not tokens:
         raise SyntaxError("Unexpected EOF while reading")
-    t = tokens.pop(0)
-    if "\"" == t:
+    t = tokens.pop(0) # get first token
+    if t is None or re.match("^\s+$", t): # throw away whitespace if not in a string
+        return read(tokens)
+    elif t in quotes: # return quoted list|symbol as tagged list.
+        print tokens
+        return [quotes[t], read(tokens)]
+    elif "\"" == t: # string
         L = []
         while tokens[0] != "\"":
             L.append(tokens.pop(0))
         tokens.pop(0)
-        return " ".join(L)
-    if "(" == t:
+        return "".join(L)
+    if "(" == t: # sexp
         L = []
         while tokens[0] != ")":
             L.append(read(tokens))
@@ -50,11 +63,10 @@ def read(tokens):
     elif ")" == t:
         raise SyntaxError("Unexpected )")
     else:
-        return atom(t)
+        return atom(t) # literal
 
 
 def parse(_str):
-    tokens, exps = tokenize(_str), []
+    tokens = tokenize(_str)
     while tokens:
-        exps.append(read(tokens))
-    return exps
+        yield read(tokens)

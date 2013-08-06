@@ -1,6 +1,6 @@
 import sys
 sys.path.append("./../")
-from parsing import parse, Sym
+from parsing import parse, Sym, _unquote, _quote
 
 tests = [
     # Basic datatypes
@@ -13,6 +13,8 @@ tests = [
     ("define", Sym("define")),
     # simple expressions
     ("(+ 1 2)", [Sym("+"), 1, 2]),
+    ("`hello", [_quote, Sym("hello")]),
+    (",(1 2 3)", [_unquote, [1, 2, 3]]),
     ("(define (add a b) (+ a b))", [Sym("define"),
                                     [Sym("add"), Sym("a"), Sym("b")],
                                     [Sym("+"), Sym("a"), Sym("b")]]),
@@ -24,10 +26,10 @@ tests = [
 def run_tests():
     failed = 0
     for t in tests:
-        try:
-            out = parse(t[0])
-        except Exception, e:
-            out = "%s: %s" % (type(e).__name__, str(e))
+        # try:
+        out = parse(t[0]).next()
+        # except Exception, e:
+        #     out = "%s: %s" % (type(e).__name__, str(e))
         res = "SUCCESS" if t[1] == out else "FAIL"
         if res == "FAIL":
             failed += 1
