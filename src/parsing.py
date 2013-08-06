@@ -46,7 +46,6 @@ def read(tokens):
     if t is None or re.match("^\s+$", t): # throw away whitespace if not in a string
         return read(tokens)
     elif t in quotes: # return quoted list|symbol as tagged list.
-        print tokens
         return [quotes[t], read(tokens)]
     elif "\"" == t: # string
         L = []
