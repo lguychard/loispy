@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"_unquote",
+				"_unquotesplicing	(global, instance)"
+			],
+			[
 				"is",
 				"isCallable"
 			],
@@ -367,7 +371,7 @@
 			"file": "src/new-parsing.py",
 			"settings":
 			{
-				"buffer_size": 925,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -385,7 +389,7 @@
 			"file": "src/analysis.py",
 			"settings":
 			{
-				"buffer_size": 4380,
+				"buffer_size": 4547,
 				"line_ending": "Unix"
 			}
 		},
@@ -401,7 +405,7 @@
 			"file": "src/main.py",
 			"settings":
 			{
-				"buffer_size": 2167,
+				"buffer_size": 2157,
 				"line_ending": "Unix"
 			}
 		},
@@ -409,7 +413,7 @@
 			"file": "src/parsing.py",
 			"settings":
 			{
-				"buffer_size": 1677,
+				"buffer_size": 1895,
 				"line_ending": "Unix"
 			}
 		},
@@ -418,14 +422,6 @@
 			"settings":
 			{
 				"buffer_size": 729,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/native.py",
-			"settings":
-			{
-				"buffer_size": 2407,
 				"line_ending": "Unix"
 			}
 		},
@@ -441,7 +437,15 @@
 			"file": "src/test/test_parsing.py",
 			"settings":
 			{
-				"buffer_size": 1345,
+				"buffer_size": 1400,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/native.py",
+			"settings":
+			{
+				"buffer_size": 2514,
 				"line_ending": "Unix"
 			}
 		}
@@ -534,9 +538,9 @@
 	},
 	"file_history":
 	[
+		"/home/loic/repositories/loispy/src/native.py",
 		"/home/loic/repositories/loispy/loispy-scripts/funcs.loisp",
 		"/home/loic/repositories/loispy/src/utils.py",
-		"/home/loic/repositories/loispy/src/native.py",
 		"/home/loic/repositories/sicp/interpreter.scm",
 		"/home/loic/repositories/loispy/src/main.py",
 		"/home/loic/repositories/loispy/src/parsing.py",
@@ -679,6 +683,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"quotation",
 			"return  ",
 			"#     \"(.+)\": lambda (.*):(.*),",
 			"class (\\w+)\\(NativeProcedure\\):\\n    def __call__(\\(.*\\)): (.*)",
@@ -800,7 +805,7 @@
 	"groups":
 	[
 		{
-			"selected": 10,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -836,15 +841,15 @@
 					"file": "src/new-parsing.py",
 					"settings":
 					{
-						"buffer_size": 925,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								48,
-								48
+								0,
+								0
 							]
 						],
 						"settings":
@@ -893,15 +898,15 @@
 					"file": "src/analysis.py",
 					"settings":
 					{
-						"buffer_size": 4380,
+						"buffer_size": 4547,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1889,
-								1889
+								676,
+								676
 							]
 						],
 						"settings":
@@ -911,7 +916,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1683.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -949,15 +954,15 @@
 					"file": "src/main.py",
 					"settings":
 					{
-						"buffer_size": 2167,
+						"buffer_size": 2157,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2165,
-								2165
+								2157,
+								2157
 							]
 						],
 						"settings":
@@ -977,15 +982,15 @@
 					"file": "src/parsing.py",
 					"settings":
 					{
-						"buffer_size": 1677,
+						"buffer_size": 1895,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1159,
-								1159
+								1352,
+								1352
 							]
 						],
 						"settings":
@@ -995,7 +1000,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.y": 561.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1030,34 +1035,6 @@
 				},
 				{
 					"buffer": 8,
-					"file": "src/native.py",
-					"settings":
-					{
-						"buffer_size": 2407,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1720,
-								1720
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1581.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
 					"file": "src/utils.py",
 					"settings":
 					{
@@ -1083,19 +1060,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 9,
 					"file": "src/test/test_parsing.py",
 					"settings":
 					{
-						"buffer_size": 1345,
+						"buffer_size": 1400,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								838,
-								838
+								733,
+								733
 							]
 						],
 						"settings":
@@ -1106,6 +1083,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/native.py",
+					"settings":
+					{
+						"buffer_size": 2514,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								881,
+								881
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

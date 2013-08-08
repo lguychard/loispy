@@ -24,12 +24,14 @@ def atom(tok):
     else:
         return Sym(tok)
 
-# TODO: rewrite read & tokenize so that they're not shit
+
+def getpos(tokens, _str, line=1):
+    return map(lambda t: (t, line, _str.index(t), _str.index(t) + len(t)), tokens)
 
 def tokenize(_str):
-    tokens = "(" + "|".join(["\s+", "\(", "\)", "\"", "[^\s\"\(\),@'`]+", "'", "`", ",(!?@)", ",@"]) + ")"
+    tokens = "(" + "|".join(["\s+", "\(", "\)", "\"", "[^\s\"\(\),@'`\[\]\{\}]+", "[`',@]{1,3}"]) + ")"
     splitter = re.compile(tokens)
-    return filter(lambda s: s != "" and s is not None, splitter.split(_str))
+    return getpos(filter(lambda s: s != "" and s is not None, splitter.split(_str)), _str)
 
 _quote, _quasiquote, _unquote, _unquotesplicing = Sym("quote"), Sym("quasiquote"), Sym("unquote"), Sym("unquote-splicing")
 
@@ -42,12 +44,12 @@ quotes = {
 def read(tokens):
     if not tokens:
         raise SyntaxError("Unexpected EOF while reading")
-    t = tokens.pop(0) # get first token
-    if t is None or re.match("^\s+$", t): # throw away whitespace if not in a string
+    tok, line, start, end = tokens.pop(0) # get first token
+    if tok is None or re.match("^\s+$", tok): # throw away whitespace if not in a string
         return read(tokens)
-    elif t in quotes: # return quoted list|symbol as tagged list.
-        return [quotes[t], read(tokens)]
-    elif "\"" == t: # string
+    elif tok in quotes: # return quoted list|symbol as tagged list.
+        return ([quotes[t], read(tokens)])
+    elif "\"" == tok: # string
         L = []
         while tokens[0] != "\"":
             L.append(tokens.pop(0))
@@ -69,3 +71,7 @@ def parse(_str):
     tokens = tokenize(_str)
     while tokens:
         yield read(tokens)
+
+
+if  __name__ == "__main__":
+    print tokenize("(define (hello who) (print \"Hello\" who))")

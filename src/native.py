@@ -26,10 +26,16 @@ class Error(Exception):
 
 class NativeProcedure(object):
 
+    def __init__(self, func):
+        self.func = func
+
     def __str__(self):
         return "<Native Procedure %s>" % self.__class__.__name__
 
     __repr__ = __str__
+
+    def __call__(self, *args):
+        return self.func(*args)
 
 
 class natproc(object):
@@ -39,7 +45,7 @@ class natproc(object):
 
     def __call__(self, func):
         procname = self.aliases[0] if self.aliases else func.__name__
-        proc = type(procname, (NativeProcedure,), {"__call__": func})()
+        proc = type(procname, (NativeProcedure,),{})(func)
         native[procname] = proc
         for a in self.aliases[1:]:
             native[a] = proc

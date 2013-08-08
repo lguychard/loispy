@@ -1,6 +1,7 @@
 from parsing import Symbol, Sym, parse
 from environment import Environment
 from procedure import Procedure
+from utils import to_string
 
 
 # 
@@ -21,7 +22,7 @@ def analyze(exp):
         if is_if(exp):
             return analyze_if(exp)
         elif is_begin(exp):
-            return analyze_begin(exp)
+            return analyze_sequence(exp)
         elif is_let(exp):
             return analyze_let(exp)
         elif is_lambda(exp):
@@ -39,7 +40,8 @@ def analyze(exp):
         else:
             return analyze_procedure_application(exp)
     else:
-        raise TypeError("Unknown expression type: %s, %s" % (str(type(exp)), exp))
+        raise TypeError("Unknown expression type: %s, %s" %
+                                                (str(type(exp)), exp))
 
 
 # 
@@ -65,13 +67,6 @@ def is_getter(exp): return type(exp[0]) == Symbol and Sym(exp[0])[0] == "."
 # 
 # TREATING EXPRESSIONS
 # 
-
-
-def analyze_begin(exp):
-    exps = [analyze(e) for e in exp[1:]]
-    def seq_noreturn(env):
-        for e in exps:
-            e(env)
 
 
 def analyze_if(exp):
@@ -135,6 +130,9 @@ def expand_cond(exp):
 
 def analyze_procedure_application(exp):
     proc = exp[0]
+    if type(proc) != Symbol:
+        raise TypeError("%s...: %s %s is not callable" % 
+            (to_string(exp)[:12], str(type(proc).__name__), to_string(proc)))
     args = [analyze(e) for e in exp[1:]]
     return lambda env: env.find(proc).get(proc)(*[a(env) for a in args])
 
@@ -158,3 +156,7 @@ def analyze_getter(exp):
         if hasattr(_attr, "__call__"): return _attr(*[a(env) for a in args])
         return _attr
     return _getattr
+
+
+def analyze_macrodef(exp):
+    raise NotImplementedError
