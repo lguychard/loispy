@@ -39,7 +39,8 @@ quotes = {
     "`": _quote,
     "'": _quasiquote,
     ",": _unquote,
-    ",@": _unquotesplicing}
+    ",@": _unquotesplicing
+    }
 
 def read(tokens):
     if not tokens:
