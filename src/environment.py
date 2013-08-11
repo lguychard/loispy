@@ -1,5 +1,6 @@
 from native import native
 
+
 class Environment(dict):
 
     def __init__(self, _vars={}, outer=None):
@@ -20,4 +21,3 @@ class Environment(dict):
 
 def make_global_env():
     return Environment(native)
-

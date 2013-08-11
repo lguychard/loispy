@@ -1,16 +1,22 @@
 import re
+from symbol import Sym, quotes
+from collections import Namedtuple
+
+AstNode = Namedtuple(["tok", "line", "start", "end", "exp"])
 
 
-class Symbol(str):
-    def __str__(self):
-        return super(Symbol, self).__str__()
+class AstNode(object):
+
+    def __init__(self, tok, line, start, end):
+        self.tok, self.line, self.start, self.end = tok, line, start, end
+        self.exp = None
+
+    def throwaway(self):
+        return self.tok is None or re.match("^\s+$", self.tok)
+
     def __repr__(self):
-        return self.__str__()
-
-
-def Sym(s, symbol_table={}):
-    symbol_table[s] = Symbol(s)
-    return symbol_table[s]
+        return "<AstNode '%s' at %d:%d,%d>%s\n" % \
+                    (self.tok, self.line, self.start, self.end, self.exp)
 
 
 def atom(tok):
@@ -29,43 +35,52 @@ def getpos(tokens, _str, line=1):
     return map(lambda t: (t, line, _str.index(t), _str.index(t) + len(t)), tokens)
 
 def tokenize(_str):
-    tokens = "(" + "|".join(["\s+", "\(", "\)", "\"", "[^\s\"\(\),@'`\[\]\{\}]+", "[`',@]{1,3}"]) + ")"
-    splitter = re.compile(tokens)
+    splitter = re.compile("""(\s+|\(|\)|"|[^\s"\(\),@'`#\[\]\}\{]+|[,`'@#]{1,3}|[\[\]\{\}])""")
     return getpos(filter(lambda s: s != "" and s is not None, splitter.split(_str)), _str)
 
-_quote, _quasiquote, _unquote, _unquotesplicing = Sym("quote"), Sym("quasiquote"), Sym("unquote"), Sym("unquote-splicing")
 
-quotes = {
-    "`": _quote,
-    "'": _quasiquote,
-    ",": _unquote,
-    ",@": _unquotesplicing
-    }
+def read_string(node, tokens):
+    L = []
+    while tokens[0][0] != "\"":
+        t, _, _, end = tokens.pop(0)
+        L.append(t)
+    node.end = tokens.pop(0)[3]
+    node.exp = "".join(L)
+    node.tok = "\"%s\"" % node.exp
+
+
+def read_sexp(node, tokens):
+    node.exp = []
+    while tokens[0][0] != ")":
+        node.exp.append(read(tokens))
+    tokens.pop(0)
+    node.end = node.exp[-1].end
+    node.tok = "(%s)" % " ".join([n.tok for n in node.exp])
+
+
+def read_quoted(node, tokens):
+    node.exp = (quotes[node.tok], read(tokens))
+    node.tok += node.exp[1].tok
+    node.end = node.exp[1].end
 
 def read(tokens):
     if not tokens:
         raise SyntaxError("Unexpected EOF while reading")
-    tok, line, start, end = tokens.pop(0) # get first token
-    if tok is None or re.match("^\s+$", tok): # throw away whitespace if not in a string
+    node = AstNode(*tokens.pop(0))
+    if node.throwaway():
         return read(tokens)
-    elif tok in quotes: # return quoted list|symbol as tagged list.
-        return ([quotes[t], read(tokens)])
-    elif "\"" == tok: # string
-        L = []
-        while tokens[0] != "\"":
-            L.append(tokens.pop(0))
-        tokens.pop(0)
-        return "".join(L)
-    if "(" == t: # sexp
-        L = []
-        while tokens[0] != ")":
-            L.append(read(tokens))
-        tokens.pop(0)
-        return L
-    elif ")" == t:
-        raise SyntaxError("Unexpected )")
     else:
-        return atom(t) # literal
+        if node.tok in quotes:
+            read_quoted(node, tokens)
+        elif "\"" == node.tok:
+            read_string(node, tokens)
+        if "(" == node.tok:
+            read_sexp(node, tokens)
+        elif ")" == node.tok:
+            raise SyntaxError("Unexpected )")
+        else:
+            node.exp = atom(node.tok)
+        return node
 
 
 def parse(_str):
@@ -75,4 +90,4 @@ def parse(_str):
 
 
 if  __name__ == "__main__":
-    print tokenize("(define (hello who) (print \"Hello\" who))")
+    print read(tokenize("(define (hello who) (print `hello who))"))

@@ -7,6 +7,7 @@ import sys
 # GLOBAL NATIVE: A DICT OF BUILT-IN PROCEDURES AND CONSTANTS
 # ----------------------------------------------------------
 
+
 native = {
     "#t": True,
     "#f": False,
@@ -45,7 +46,7 @@ class natproc(object):
 
     def __call__(self, func):
         procname = self.aliases[0] if self.aliases else func.__name__
-        proc = type(procname, (NativeProcedure,),{})(func)
+        proc = type(procname, (NativeProcedure,), {})(func)
         native[procname] = proc
         for a in self.aliases[1:]:
             native[a] = proc
@@ -55,6 +56,7 @@ class natproc(object):
 #-----------------------------
 # NATIVE PROCEDURE DEFINITIONS
 #-----------------------------
+
 
 for p in min, max, range, map, reduce, filter, sys.exit:
     natproc()(p)
