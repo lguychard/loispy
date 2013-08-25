@@ -1,9 +1,0 @@
-(define (add a b)
-        (+ a b))
-
-(define (factorial n)
-        (if (= n 0)
-            1
-            (* n (factorial (- n 1)))))
-
-(factorial 20)

@@ -4,8 +4,152 @@
 		"selected_items":
 		[
 			[
+				"method",
+				"method-names"
+			],
+			[
+				"load",
+				"load_libs	(global, function)"
+			],
+			[
+				"TE",
+				"THE_GLOBAL_ENV	(imported, instance)"
+			],
+			[
+				"else",
+				"else-clause"
+			],
+			[
+				"cond",
+				"cond-cases"
+			],
+			[
+				"mae",
+				"make-cond-cases"
+			],
+			[
+				"make-",
+				"make-cond-cases"
+			],
+			[
+				"re",
+				"read(tokens)	(global, function)"
+			],
+			[
+				"num",
+				"numpositional	(attribute, instance)"
+			],
+			[
+				"rest",
+				"rest-clauses"
+			],
+			[
+				"ep",
+				"empty"
+			],
+			[
+				"pu",
+				"public-method-names"
+			],
+			[
+				"private",
+				"private-methods"
+			],
+			[
+				"make",
+				"make-symbol"
+			],
+			[
+				"Sy",
+				"Sym(s, symbol_table)	(global, function)"
+			],
+			[
+				"public",
+				"public-methods"
+			],
+			[
+				"qu",
+				"quote_shorthand	(global, instance)"
+			],
+			[
+				"get",
+				"get_exp"
+			],
+			[
+				"Inde",
+				"IndexError	(builtin, class)"
+			],
+			[
+				"_unq",
+				"_unquotesplicing	(imported, instance)"
+			],
+			[
+				"_lamb",
+				"_lambdashorthand	(imported, instance)"
+			],
+			[
+				"macro",
+				"macro_args	(local, instance)"
+			],
+			[
+				"first",
+				"first-consequent"
+			],
+			[
+				"_a",
+				"_lambdashorthand	(global, instance)"
+			],
+			[
+				"isla",
+				"is_lambda_shorthand"
+			],
+			[
+				"unq",
+				"unquoted_splicing(exp)	(global, function)"
+			],
+			[
+				"unqu",
+				"unquoted_splicing(exp)	(global, function)"
+			],
+			[
+				"value",
+				"value_of_quote	(local, instance)"
+			],
+			[
+				"analy",
+				"analyze_lambda(astnode)	(global, function)"
+			],
+			[
+				"anal",
+				"analyze_let(astnode)	(global, function)"
+			],
+			[
+				"make_g",
+				"make_global_env	(global, function)"
+			],
+			[
+				"analyze",
+				"analyze_procdef(exp)	(global, function)"
+			],
+			[
+				"sYMB",
+				"Symbol"
+			],
+			[
 				"_unquote",
-				"_unquotesplicing	(global, instance)"
+				"_unquote	(global, instance)"
+			],
+			[
+				"code",
+				"codeobj"
+			],
+			[
+				"CodE",
+				"CodeObj"
+			],
+			[
+				"Code",
+				"CodeObj"
 			],
 			[
 				"is",
@@ -48,10 +192,6 @@
 				"apply_proc(env)	(local, function)"
 			],
 			[
-				"analyze",
-				"analyze_sequence(seq)	(global, function)"
-			],
-			[
 				"set",
 				"set_var(env)	(local, function)"
 			],
@@ -62,10 +202,6 @@
 			[
 				"Key",
 				"KeyboardInterrupt	(builtin, class)"
-			],
-			[
-				"analy",
-				"analyze_sequence(seq)	(global, function)"
 			],
 			[
 				"analyz",
@@ -212,10 +348,6 @@
 				"VocabProvider"
 			],
 			[
-				"get",
-				"getCollection"
-			],
-			[
 				"article",
 				"article_collection"
 			],
@@ -359,96 +491,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/environment.py",
-			"settings":
-			{
-				"buffer_size": 488,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/new-parsing.py",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Package Control Messages\n========================\n\nSublimeLinter:\n-------------\n\n  SublimeLinter 1.7.2 changelog\n  =============================\n  \n  CHANGES/FIXES\n  -------------\n  - Update JSHint to v2.1.8\n  - Fixing compatibility regression with latest JSHint\n  - Fixing compatibility regression with latest Pyflakes\n  - Apologizing for hasty v1.7.1 release ;)\n  \n\n  SublimeLinter 1.7.1 changelog\n  =============================\n  \n  CHANGES/FIXES\n  -------------\n  - Update JSLint to latest\n  - Update JSHint to v2.1.5\n  - Updated link to JSHint documentation\n  - Updated PEP8 to v1.4.6\n  - Updated Pyflakes to v0.7.3\n  - Gutter mark icons are now retina quality\n  - Included Gutter mark icon PSD (for tinkering :)\n  \n",
-			"settings":
-			{
-				"buffer_size": 722,
-				"line_ending": "Unix",
-				"name": "Package Control Messages",
-				"scratch": true
-			}
-		},
-		{
-			"file": "src/analysis.py",
-			"settings":
-			{
-				"buffer_size": 4547,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "loispy.sublime-project",
-			"settings":
-			{
-				"buffer_size": 280,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main.py",
-			"settings":
-			{
-				"buffer_size": 2157,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/parsing.py",
-			"settings":
-			{
-				"buffer_size": 1895,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/procedure.py",
-			"settings":
-			{
-				"buffer_size": 729,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/utils.py",
-			"settings":
-			{
-				"buffer_size": 429,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/test/test_parsing.py",
-			"settings":
-			{
-				"buffer_size": 1400,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/native.py",
-			"settings":
-			{
-				"buffer_size": 2514,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
@@ -459,6 +501,10 @@
 			[
 				"syntax lisp",
 				"Set Syntax: Lisp"
+			],
+			[
+				"syntax coff",
+				"Set Syntax: CoffeeScript"
 			],
 			[
 				"syntax pyth",
@@ -505,10 +551,6 @@
 				"Set Syntax: CoffeeScript"
 			],
 			[
-				"syntax coff",
-				"Set Syntax: CoffeeScript"
-			],
-			[
 				"install",
 				"Package Control: Install Package"
 			],
@@ -538,13 +580,27 @@
 	},
 	"file_history":
 	[
+		"/home/loic/repositories/loispy/src/analysis.py",
+		"/home/loic/repositories/loispy/src/parsing.py",
+		"/home/loic/repositories/loispy/src/stdlib/builtinmacros.loisp",
+		"/home/loic/repositories/loispy/src/codeobject.py",
+		"/home/loic/repositories/loispy/src/main.py",
+		"/home/loic/repositories/loispy/src/procedure.py",
+		"/home/loic/repositories/loispy/src/builtin.py",
+		"/home/loic/repositories/loispy/src/builtinmacros.loisp",
+		"/home/loic/repositories/loispy/src/lib",
+		"/home/loic/repositories/loispy/loispy-scripts/test_macros.loisp",
+		"/home/loic/repositories/loispy/src/environment.py",
+		"/home/loic/repositories/loispy/src/symbol.py",
+		"/home/loic/repositories/loispy/src/error.py",
+		"/home/loic/repositories/loispy/src/utils.py",
 		"/home/loic/repositories/loispy/src/native.py",
 		"/home/loic/repositories/loispy/loispy-scripts/funcs.loisp",
-		"/home/loic/repositories/loispy/src/utils.py",
+		"/home/loic/repositories/loispy/src/macro.py",
+		"/home/loic/repositories/loispy/src/test/test_parsing.py",
+		"/home/loic/repositories/loispy/loispy.sublime-project",
+		"/home/loic/repositories/loispy/src/new-parsing.py",
 		"/home/loic/repositories/sicp/interpreter.scm",
-		"/home/loic/repositories/loispy/src/main.py",
-		"/home/loic/repositories/loispy/src/parsing.py",
-		"/home/loic/repositories/loispy/src/procedure.py",
 		"/home/loic/repositories/loispy/src/loispylib/__init__.py",
 		"/home/loic/repositories/loispy/src/loispylib/debug.py",
 		"/home/loic/repositories/loispy/src/loispylib/procedure.py",
@@ -555,7 +611,6 @@
 		"/home/loic/repositories/loispy/src/loispylib/parsing.py",
 		"/home/loic/repositories/loispy/README.md",
 		"/home/loic/repositories/loispy/bin/loispy",
-		"/home/loic/repositories/loispy/src/test/test_parsing.py",
 		"/home/loic/repositories/loispy/LICENSE.txt",
 		"/home/loic/repositories/loispy/src/loispylib/test/__init__.py",
 		"/home/loic/repositories/loispy/bin/losipy",
@@ -652,37 +707,83 @@
 		"/Users/loic/Dropbox/T3L 2011-2012/python/ex41.py",
 		"/Users/loic/Dropbox/T3L 2011-2012/python/ex35.py",
 		"/Users/loic/Dropbox/T3L 2011-2012/python/test.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/33.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex34.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex24.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex25.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex26.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex29.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex30.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex31.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex32.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo_rdfToXml.xsl",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/datatype_source.html",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/functionalproperties_cible.html",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo_xmlToHtml.xsl",
-		"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/handin/mo-source.xml"
+		"/Users/loic/Dropbox/T3L 2011-2012/python/33.py"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
 		"height": 0.0,
 		"where_history":
 		[
+			"/home/loic/repositories/loispy/src"
 		]
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"unquoted",
+			"begin",
+			"analyze_begin",
+			")))))",
+			"`",
+			",",
+			"read_quoted",
+			"split",
+			"_eval",
+			"numargs",
+			"quotes",
+			"type",
+			"proc_applic",
+			"is not",
+			"let",
+			"is_quoted",
+			"print",
+			"format_ex",
+			"format_exd",
+			"proced",
+			"procedure_app",
+			"vardef",
+			"let",
+			"alt",
+			"lambda_shorthand",
+			"is_tagged",
+			"shorthand",
+			"macro",
+			"unquoted",
+			"the_global_env",
+			"analyze_procedure",
+			"analyze_procecure_",
+			"analyze_getter",
+			"analyze_lambda",
+			"@builtin",
+			"from native import native",
+			"NativeProcedure",
+			"natproc",
+			"list",
+			"last",
+			"first",
+			"make_global_env",
+			"c",
+			"expand_cond",
+			"procdef",
+			"185",
+			"getter",
+			"begin",
+			"analyze_lambda",
+			"lambda",
+			"args",
+			"error",
+			"Sym",
+			"error",
+			"self, ",
+			"add",
+			"applicaton",
+			"analyze_procedure_application",
 			"quotation",
 			"return  ",
 			"#     \"(.+)\": lambda (.*):(.*),",
@@ -752,31 +853,20 @@
 			"mustbeat",
 			"animated",
 			"dc:title",
-			"releasetype",
-			"dc:title",
-			"morceau",
-			"dc:title",
-			"&",
-			"&quot;",
-			"ISRC",
-			"mo:isrc",
-			"\"?>",
-			"br",
-			"http",
-			"deprecated",
-			"téléchargement",
-			"</td>",
-			"<td>",
-			"h4",
-			"release_of",
-			"type"
+			"releasetype"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"THE_GLOBAL_ENV",
+			"@builtinproc",
+			"from builtin import builtin",
+			"BuiltInProcedure",
+			"builtin",
+			"",
 			"return ",
 			"@natproc\\ndef \\1(\\2):\\n    return \\3\\n",
 			"@natproc\\ndef \\1(\\2):\\n    return \\3",
@@ -805,316 +895,8 @@
 	"groups":
 	[
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/environment.py",
-					"settings":
-					{
-						"buffer_size": 488,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								488,
-								488
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/new-parsing.py",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 204.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"settings":
-					{
-						"buffer_size": 722,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								722,
-								722
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/analysis.py",
-					"settings":
-					{
-						"buffer_size": 4547,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								676,
-								676
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1683.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "loispy.sublime-project",
-					"settings":
-					{
-						"buffer_size": 280,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								213,
-								213
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/main.py",
-					"settings":
-					{
-						"buffer_size": 2157,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2157,
-								2157
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 816.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/parsing.py",
-					"settings":
-					{
-						"buffer_size": 1895,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1352,
-								1352
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 561.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/procedure.py",
-					"settings":
-					{
-						"buffer_size": 729,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								729,
-								729
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "src/utils.py",
-					"settings":
-					{
-						"buffer_size": 429,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								429,
-								429
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "src/test/test_parsing.py",
-					"settings":
-					{
-						"buffer_size": 1400,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								733,
-								733
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "src/native.py",
-					"settings":
-					{
-						"buffer_size": 2514,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								881,
-								881
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1164,8 +946,36 @@
 		"selected_items":
 		[
 			[
-				"utils",
-				"src/utils.py"
+				"b",
+				"src/stdlib/builtinmacros.loisp"
+			],
+			[
+				"ana",
+				"src/analysis.py"
+			],
+			[
+				"main",
+				"src/main.py"
+			],
+			[
+				"bu",
+				"src/builtin.py"
+			],
+			[
+				"buil",
+				"src/builtin.py"
+			],
+			[
+				"",
+				"src/parsing.py"
+			],
+			[
+				"envir",
+				"src/environment.py"
+			],
+			[
+				"analy",
+				"src/analysis.py"
 			],
 			[
 				"proce",
@@ -1176,12 +986,80 @@
 				"src/parsing.py"
 			],
 			[
-				"prmitive",
-				"coffee/04__primitives.litcoffee"
+				"procedure",
+				"src/procedure.py"
 			],
 			[
-				"",
-				"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/tex/biblio.bib"
+				"an",
+				"src/analysis.py"
+			],
+			[
+				"sy",
+				"src/symbol.py"
+			],
+			[
+				"pars",
+				"src/parsing.py"
+			],
+			[
+				"a",
+				"src/analysis.py"
+			],
+			[
+				"code",
+				"src/codeobject.py"
+			],
+			[
+				"bui",
+				"src/builtinmacros.loisp"
+			],
+			[
+				"buit",
+				"src/builtin.py"
+			],
+			[
+				"tes",
+				"loispy-scripts/test_macros.loisp"
+			],
+			[
+				"built",
+				"src/builtin.py"
+			],
+			[
+				"builtin",
+				"src/builtin.py"
+			],
+			[
+				"test",
+				"loispy-scripts/test_macros.loisp"
+			],
+			[
+				"envi",
+				"src/environment.py"
+			],
+			[
+				"utils",
+				"src/utils.py"
+			],
+			[
+				"error",
+				"src/error.py"
+			],
+			[
+				"syl",
+				"src/symbol.py"
+			],
+			[
+				"native",
+				"src/native.py"
+			],
+			[
+				"anal",
+				"src/analysis.py"
+			],
+			[
+				"prmitive",
+				"coffee/04__primitives.litcoffee"
 			]
 		],
 		"width": 0.0
@@ -1194,10 +1072,10 @@
 		],
 		"width": 0.0
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 192.0,
+	"side_bar_width": 149.0,
 	"status_bar_visible": true
 }
