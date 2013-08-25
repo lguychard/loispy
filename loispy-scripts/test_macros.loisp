@@ -1,0 +1,5 @@
+(=> getlast (first)
+  (switch first
+    (`helene `soldano)
+    (`loic `guychard)
+    (default jeanmi)))
