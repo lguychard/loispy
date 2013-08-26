@@ -196,6 +196,42 @@ def contains(x, y):
     return y in x
 
 
+# ------------------
+# MANIPULATING DICTS
+# ------------------
+
+@builtinproc()
+def get(dct, key):
+    if type(dct) is not dict:
+        raise TypeError("%s... is not a dict" % to_string(dct)[:15])
+    return dct[key]
+
+@builtinproc("set-val")
+def set_val(dct, key, val):
+    if type(dct) is not dict:
+        raise TypeError("%s... is not a dict" % to_string(dct)[:15])
+    dct[key] = val
+
+@builtinproc()
+def keys(dct):
+    if type(dct) is not dict:
+        raise TypeError("%s... is not a dict" % to_string(dct)[:15])
+    return dct.keys()
+
+@builtinproc()
+def values(dct):
+    if type(dct) is not dict:
+        raise TypeError("%s... is not a dict" % to_string(dct)[:15])
+    return dct.values()
+
+@builtinproc()
+def items(dct):
+    if type(dct) is not dict:
+        raise TypeError("%s... is not a dict" % to_string(dct)[:15])
+    return dct.items()
+
+
+
 # ------------------------------------
 # TYPE PREDICATES - mutually exclusive
 # ------------------------------------

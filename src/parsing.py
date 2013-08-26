@@ -1,5 +1,5 @@
 import re
-from symbol import Sym, quotes
+from symbol import Symbol, Sym, quotes, _dict
 from utils import isa
 
 
@@ -15,9 +15,15 @@ class AstNode(object):
         return self.tok is None or re.match("^\s+$", self.tok)
 
     def get_exp(self):
-        return [n.get_exp() for n in self.exp] if isa(self.exp, list) else self.exp
+        if isa(self.exp, list):
+            if self.exp[0] is _dict:
+                return dict(zip(*[n.get_exp() for l in self.exp[1:] for n in l]))
+            else:
+                return [n.get_exp() for n in self.exp]
+        else:
+            return self.exp
 
-    def __repr__(self):
+    def __str__(self):
         return "<AstNode '%s' at %d:%d,%d>%s\n" % \
                     (self.tok, self.line, self.start, self.end, self.exp)
 
@@ -47,7 +53,7 @@ def split(_str):
         "\(", "\)",                     # parens
         """[^\s"\(\),@'`#\[\]\}\{]+""", # symbols
         "'", "`", ",@?", "#",           # quotes, lambda shorthand
-        "[\[\]\{\}]"                    # square and curly brackets (unused but reserved)
+        "[\[\]\{\}]"                    # square and curly brackets
         ]) + ")").split(_str)
 
 
@@ -106,6 +112,23 @@ def read_quoted(node, tokens):
     return quotednode
 
 
+def read_key(tokens):
+    node = read(tokens)
+    if not isa(node.exp, Symbol)  or node.tok[0] != ":":
+        raise SyntaxError("Key formatting error: %s" % node.tok)
+    node.exp = Sym(node.exp[1:])
+    return node
+
+
+def read_dict(node, tokens):
+    node.exp = [_dict, [], []]
+    while tokens[0][0] != "}":
+        node.exp[1].append(read_key(tokens))
+        node.exp[2].append(read(tokens))
+    tokens.pop(0)
+    return node
+
+
 def read(tokens):
     """
     Iterates through a list of strings (tokens) and returns an AstNode object.
@@ -127,8 +150,11 @@ def read(tokens):
             return read_string(node, tokens)
         elif "(" == node.tok:
             return read_list(node, tokens)
-        elif ")" == node.tok:
-            raise SyntaxError("Unexpected ) in tokens: %s" % [t[0] for t in tokens])
+        elif "{" == node.tok:
+            return read_dict(node, tokens)
+        elif node.tok in ["}", ")", "]", "["]:
+            raise SyntaxError("Unexpected token: %s in %s" %
+                                            (node.tok, [t[0] for t in tokens]))
         else:
             node.exp = atom(node.tok)
             return node

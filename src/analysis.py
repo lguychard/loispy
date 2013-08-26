@@ -1,7 +1,8 @@
 from parsing import parse, AstNode
 from symbol import Symbol, Sym
 from symbol import _quote, _unquote, _quasiquote, _unquotesplicing, _let, _set,\
-    _else, _lambda, _lambdashorthand, _if, _begin, _vardef, _procdef, _macrodef
+            _else, _lambda, _lambdashorthand, _if, _begin, _vardef, _procdef, \
+            _macrodef, _dict, _key
 from environment import Environment, THE_GLOBAL_ENV
 from procedure import Procedure
 from codeobject import CodeObject
@@ -64,6 +65,8 @@ def analyze(astnode, toplevel=False):
         return CodeObject(astnode, lambda env: env.find(exp)[exp])
     # Compound expressions
     elif isa(exp, list):
+        if is_dict_literal(exp):
+            return analyze_dict_literal(astnode)
         if is_if(exp):
             return analyze_if(astnode)
         elif is_begin(exp):
@@ -182,6 +185,9 @@ def is_getter(exp):
 def is_assignment(exp):
     return is_tagged(exp, _set)
 
+def is_dict_literal(exp):
+    return exp[0] is _dict
+
 
 # --------------------
 # TREATING EXPRESSIONS
@@ -208,6 +214,10 @@ def make_if(pred, then, alt):
 def analyze_begin(astnode, toplevel):
     exps = [analyze(node, toplevel) for node in astnode.exp[1:]]
     def begin_(env):
+        """
+        Execute all the expressions in the begin block
+        without returning a value
+        """
         for e in exps:
             e.exec_(env)
         return None
@@ -332,23 +342,13 @@ def expand_quasiquoted(exp):
             return ret
     return expand
 
+
 def expand_unquoted_splicing(exp, env):
     res = analyze(exp[1]).exec_(env)
     if not hasattr(res, "__iter__"):
         raise Exception("Unquoted-splicing items must be iterable!")
     for item in res:
         yield item
-
-
-def _expand(_exp, env):
-    ret = []
-    for node in _exp:
-        x = node.exp
-        if not isa(x, list) or not unquoted(x):
-            ret.append(node.get_exp())
-        else:
-            ret.append(analyze(x[1]).exec_(env))
-    return ret
 
 
 def analyze_getter(astnode):
@@ -380,6 +380,14 @@ def analyze_assignment(astnode):
                 return Error(exc=e)
             enclosing.set(var, val.exec_(env))
         return CodeObject(astnode, set_)
+
+
+def analyze_dict_literal(astnode):
+    keys = [node.exp for node in astnode.exp[1]]
+    values = [analyze(node) for node in astnode.exp[2]]
+    def dict_(env):
+        return dict(zip(keys, [val.exec_(env) for val in values]))
+    return CodeObject(astnode, dict_)
 
 
 # ------

@@ -34,6 +34,8 @@ _let = Sym("let")
 _lambda = Sym("lambda")
 _set = Sym("set!")
 _else = Sym("else")
+_dict = Sym("$dict$")
+_key = Sym("$key$")
 
 # ------
 # QUOTES
