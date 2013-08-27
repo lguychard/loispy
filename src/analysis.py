@@ -75,8 +75,8 @@ def analyze(astnode, toplevel=False):
             return analyze_assignment(astnode)
         elif is_let(exp):
             return analyze_let(astnode)
-        elif is_lambda(exp):
-            return analyze_lambda(astnode)
+        # elif is_lambda(exp):
+        #     return analyze_lambda(astnode)
         elif is_lambda_shorthand(exp):
             return analyze_lambda_shorthand(astnode)
         elif is_vardef(exp):
@@ -148,8 +148,8 @@ def is_vardef(exp):
 def is_procdef(exp):
     return is_tagged(exp, _procdef)
 
-def is_lambda(exp):
-    return is_tagged(exp, _lambda)
+# def is_lambda(exp):
+#     return is_tagged(exp, _lambda)
 
 def is_lambda_shorthand(exp):
     return is_tagged(exp, _lambdashorthand)
@@ -257,15 +257,19 @@ def analyze_vardef(astnode):
 
 def analyze_procdef(astnode):
     exp = astnode.exp
-    procname, args, body = exp[1].exp, exp[2].get_exp(), exp[3:]
-    proc = make_proc(args, body, procname)
-    return CodeObject(astnode, lambda env: env.set(procname, proc(env)))
+    if not isa(exp[1].exp, list):
+        procname, args, body = exp[1].exp, exp[2].get_exp(), exp[3:]
+        proc = make_proc(args, body, procname)
+        return CodeObject(astnode, lambda env: env.set(procname, proc(env)))
+    else:
+        procname, args, body = "", exp[1].get_exp(), exp[2:]
+        return CodeObject(astnode, make_proc(args, body, procname))
 
 
-def analyze_lambda(astnode):
-    exp = astnode.exp
-    args, body = exp[1].get_exp(), exp[2:]
-    return CodeObject(astnode, make_proc(args, body))
+# def analyze_lambda(astnode):
+#     exp = astnode.exp
+#     args, body = exp[1].get_exp(), exp[2:]
+#     return CodeObject(astnode, make_proc(args, body))
 
 
 def analyze_lambda_shorthand(astnode):
@@ -275,7 +279,7 @@ def analyze_lambda_shorthand(astnode):
     return CodeObject(astnode, make_proc(args, body))
 
 
-def make_proc(args, body, name="lambda"):
+def make_proc(args, body, name=""):
     body = analyze_sequence(body)
     return lambda env: Procedure(env, args, body, name)
 

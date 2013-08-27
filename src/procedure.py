@@ -9,7 +9,7 @@ class Procedure(object):
 
     """
 
-    def __init__(self, env, args, body, name="lambda"):
+    def __init__(self, env, args, body, name=""):
         """
         @param Environment env
         @param list[str] args
@@ -55,7 +55,7 @@ class Procedure(object):
         return _vars
 
     def __str__(self):
-        return "<Procedure %s>" % self.name
+        return "<Procedure %s>" % self.name if self.name else "<Procedure>"
 
     def __repr__(self):
         return self.__str__()

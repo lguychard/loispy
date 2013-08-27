@@ -1,4 +1,5 @@
 from symbol import Symbol
+from error import Error
 
 def to_string(x):
     if isa(x, bool) or x is None:
@@ -13,6 +14,8 @@ def to_string(x):
         return "(%s)" % " ".join([to_string(y) for y in x])
     elif isa(x, dict):
         return "{%s}" % " ".join([":%s %s" % (k, to_string(x[k])) for k in x])
+    elif isa(x, Error):
+        return str(x)
     elif isinstance(x, Exception):
         return "%s: %s" % (type(x).__name__, str(x))
     else:

@@ -8,7 +8,12 @@ class CodeObject(object):
 
     def exec_(self, env):
         """ Run the analyzed code in the context of an environment """
-        val = self.code(env)
-        if type(val) == Error and val.codeobj is None:
-            val.codeobj = self
-        return val
+        try:
+            val = self.code(env)
+            return val
+        except Error as e:
+            if e.codeobj is None:
+                e.codeobj = self
+                raise e
+        except Exception as e:
+            raise Error(codeobj=self, exc=e)
