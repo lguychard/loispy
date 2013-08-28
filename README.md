@@ -18,7 +18,7 @@ TBD
 SYNTAX
 ------
 
-### procedures
+### Procedures
 
     >> (=> my-proc (x) ())
     #n
@@ -63,7 +63,7 @@ A clojure-like lambda shorthand syntax is provided:
     4
 
 
-### booleans & NoneType
+### Booleans & NoneType
 
     >> ($ t #t)
     #n
@@ -74,7 +74,7 @@ A clojure-like lambda shorthand syntax is provided:
 
 
 
-### list
+### Lists
 
 Loispy lists are Python lists.
 
@@ -91,7 +91,7 @@ They can be declared using quotations, or the `list` built-in procedure.
     #t
 
 
-### dict
+### Dicts
 
 Loispy dicts are python dicts.
 Implementation is currently very rough, awful & buggy.
@@ -103,7 +103,19 @@ Implementation is currently very rough, awful & buggy.
 MACROS
 ------
 
-Loispy provides scheme-like macros, defined using the `macro` keyword. A `macro-expand`-like procedure is yet to be implemented, but definitely will be (most of the stuff is there...)
+Loispy provides scheme-like macros, defined using the `macro=>` keyword. Macros can only be defined at top-level, or within a `begin` block that is itself at top-level. macro-expand`-like procedure is yet to be implemented, but definitely will be (most of the stuff is there...)
+
+Some of the loisp syntax (`cond`, `switch`, `let*`) is implemented using loisp macros. Here is, for instance, the macrodef for `let*`:
+
+    (macro=> let* (vars body...)
+      (=> expand (clauses body)
+        (let ((first-clause (first clauses))
+              (rest-clauses (all-but-first clauses)))
+             (if (empty? rest-clauses)
+                 `(let (,first-clause) ,@body)
+                 `(let (,first-clause) ,(expand rest-clauses body)))))
+      (expand vars body))
+
 
 
 TESTING
