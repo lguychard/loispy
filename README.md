@@ -9,14 +9,14 @@ The foundations of the code are heavily inspired by Abelsson, Sussman & Sussman'
 
 Mostly though, this will be a laboratory for me to conduct godawful experiments in lisp dialects interpretation.
 
-PHILOSOPHY
+Philosophy
 ----------
 
 TBD
 
 
-SYNTAX
-------
+Syntax and Datatypes
+--------------------
 
 ### Procedures
 
@@ -73,6 +73,19 @@ A clojure-like lambda shorthand syntax is provided:
     #f
 
 
+### Strings
+
+Strings are scheme-like, delimited by double quotes.
+
+    >> ($ x "hello")
+    #n
+    >> (string? x)
+    #t
+    >> (upper x)
+    "HELLO"
+    >> (+ "J" (all-but-first (upper x)))
+    "JELLO"
+
 
 ### Lists
 
@@ -100,7 +113,7 @@ Implementation is currently very rough, awful & buggy.
     {:hello "world" :this `is-cool :hi 5 :dat #t}
 
 
-MACROS
+Macros
 ------
 
 Loispy provides scheme-like macros, defined using the `macro=>` keyword. Macros can only be defined at top-level, or within a `begin` block that is itself at top-level. macro-expand`-like procedure is yet to be implemented, but definitely will be (most of the stuff is there...)
@@ -108,6 +121,7 @@ Loispy provides scheme-like macros, defined using the `macro=>` keyword. Macros 
 Some of the loisp syntax (`cond`, `switch`, `let*`) is implemented using loisp macros. Here is, for instance, the macrodef for `let*`:
 
     (macro=> let* (vars body...)
+      ;; Implements a special form for sequential variable binding.
       (=> expand (clauses body)
         (let ((first-clause (first clauses))
               (rest-clauses (all-but-first clauses)))
@@ -118,13 +132,12 @@ Some of the loisp syntax (`cond`, `switch`, `let*`) is implemented using loisp m
 
 
 
-TESTING
+Testing
 -------
 
-TBD
+Loispy should probably include a test suite, but it currently doesn't.
 
-LICENSE
+License
 -------
 
-TBD
-
+Loispy is made publicly available under the terms of the [wtfpl license](http://www.wtfpl.net/).
