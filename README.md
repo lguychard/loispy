@@ -5,7 +5,7 @@ This is my toy lisp learning project.
 
 Name stands for *LO*ic's l*IS*p in *PY*thon.
 
-The foundations of the code are heavily inspired by Abelsson, Sussman & Sussman's *Structure and Interpretation of Computer Programs* (SICP) & Peter Norvig's blogs, lis.py & lispy.py. I also sprinkled in some Clojure-like things, the implementation how-to of which intrigued me.
+The foundations of the code are heavily inspired by Abelsson, Sussman & Sussman's *Structure and Interpretation of Computer Programs* ([SICP](http://mitpress.mit.edu/sicp/)) & Peter Norvig's blogs, [lis.py](http://norvig.com/lispy.html) & [lispy.py](http://norvig.com/lispy2.html). I also sprinkled in some Clojure-like things, the implementation how-to of which intrigued me.
 
 Mostly though, this will be a laboratory for me to conduct godawful experiments in lisp dialects interpretation.
 
@@ -81,8 +81,6 @@ Strings are scheme-like, delimited by double quotes.
     #n
     >> (string? x)
     #t
-    >> (upper x)
-    "HELLO"
     >> (+ "J" (all-but-first (upper x)))
     "JELLO"
 
@@ -129,6 +127,10 @@ Some of the loisp syntax (`cond`, `switch`, `let*`) is implemented using loisp m
                  `(let (,first-clause) ,@body)
                  `(let (,first-clause) ,(expand rest-clauses body)))))
       (expand vars body))
+
+
+    >> (let* ((a 1) (b a)) b)
+    1
 
 
 
