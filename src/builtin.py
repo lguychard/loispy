@@ -245,6 +245,10 @@ def type_(arg):
 def is_list(arg):
     return type(arg) is list
 
+@builtinproc("dict?")
+def is_dict(arg):
+    return type(arg) is dict
+
 @builtinproc("symbol?")
 def is_symbol(arg):
     return type(arg) is Symbol

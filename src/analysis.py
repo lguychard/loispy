@@ -1,7 +1,7 @@
 from parsing import parse, AstNode
 from symbol import Symbol, Sym
 from symbol import _quote, _unquote, _quasiquote, _unquotesplicing, _let, _set,\
-            _else, _lambda, _lambdashorthand, _if, _begin, _vardef, _procdef, \
+            _else, _lambdashorthand, _if, _begin, _vardef, _procdef, \
             _macrodef, _dict, _key
 from environment import Environment, THE_GLOBAL_ENV
 from procedure import Procedure
