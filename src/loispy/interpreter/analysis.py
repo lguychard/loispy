@@ -6,7 +6,7 @@ from symbol import _quote, _unquote, _quasiquote, _unquotesplicing, _let, _set,\
 from environment import Environment, THE_GLOBAL_ENV
 from procedure import Procedure
 from codeobject import CodeObject
-from builtin import builtin
+from builtin import builtin, builtinproc
 from error import error, Error
 from utils import to_string, isa
 from re import findall
@@ -41,6 +41,9 @@ def eval(_str, env=THE_GLOBAL_ENV):
     @param Environment env
     """
     return [analyze(e, toplevel=True).exec_(env) for e in parse(_str)][-1]
+
+
+THE_GLOBAL_ENV.set("eval", builtinproc()(eval))
 
 
 def analyze(astnode, toplevel=False):
@@ -233,6 +236,11 @@ def analyze_let(astnode):
     analyzed = map(lambda node: analyze(node.exp[1]), varexp)
     exps = analyze_sequence(exp[2:])
     def _let(env):
+        """
+        Build a new env in which we define
+        the evaluated vars, and evaluate the expressions
+        in said env.
+        """
         _vars = dict(zip(varnames,
                         map(lambda codeobj: codeobj.exec_(env), analyzed)))
         return exps(Environment(_vars, env))
@@ -243,6 +251,10 @@ def analyze_sequence(seq):
     exps = [analyze(e) for e in seq]
     last = exps.pop()
     def seq(env):
+        """
+        Evaluate all the expressions in a sequence, return the
+        last resulting value
+        """
         for e in exps:
             e.exec_(env)
         return last.exec_(env)
@@ -284,21 +296,6 @@ def make_proc(args, body, name=""):
     return lambda env: Procedure(env, args, body, name)
 
 
-def expand_cond(exp):
-    last = exp.pop().exp
-    if not is_tagged(last, _else):
-        raise SyntaxError("Else clause is not last")
-    else:
-        exps = map(lambda node: [analyze(n) for n in node.exp], exp[1:])
-        else_exp = analyze(last[1])
-        def cond(env):
-            for e in exps:
-                if e[0].exec_(env):
-                    return e[1].exec_(env)
-            return else_exp.exec_(env)
-        return cond
-
-
 def analyze_procedure_application(astnode):
     exp = astnode.exp
     proc = analyze(exp[0])
@@ -311,6 +308,9 @@ def analyze_procedure_application(astnode):
 
 
 def analyze_builtin_proc_application(astnode):
+    """
+    Used to bypass the environment lookup for builtin procedures
+    """
     exp = astnode.exp
     proc = builtin[exp[0].exp]
     args = [analyze(node) for node in exp[1:]]
@@ -320,7 +320,7 @@ def analyze_builtin_proc_application(astnode):
 def analyze_quotation(astnode):
     exp = astnode.exp
     text_of_quote = exp[1]
-    if quoted(exp):
+    if quoted(exp): # Just return the quoted value
         text_of_quote = text_of_quote.get_exp()
         return CodeObject(astnode, lambda env: text_of_quote)
     elif quasiquoted(exp):
@@ -330,8 +330,12 @@ def analyze_quotation(astnode):
 
 
 def expand_quasiquoted(exp):
+    # expansion has to happen at runtime (we need to access the actual
+    # values being referenced), this is why expand_quasiquoted returns a
+    # function.
     def expand(env):
         if not isa(exp, list):
+            # Like quote, just return the quoted value.
             return exp
         elif unquoted(exp):
             return analyze(exp[1]).exec_(env)
@@ -423,15 +427,14 @@ def analyze_macrodef(astnode, toplevel):
     return CodeObject(astnode, lambda env: env.set(macro_name, macro))
 
 
-def macro_expand(astnode):
-    exp = astnode.exp
-    macro = macro_table.get(exp[0].exp)
-    macro_args = astnode.get_exp()[1:]
-    return macro(*macro_args)
+def macro_expand(macro, macro_args):
+    return macro_table.get(macro)(*exp)
 
 
 def analyze_macro_application(astnode):
-    expanded = macro_expand(astnode)
+    exp = astnode.exp
+    macro, macro_args = exp[0].exp, astnode.get_exp()
+    expanded = macro_expand(macro, macro_args)
     tostring = str(to_string(expanded))
     parsed = analyze(list(parse(tostring))[-1])
     return CodeObject(astnode, lambda env: parsed.exec_(env))

@@ -51,6 +51,7 @@ class builtinproc(object):
         builtin[procname] = proc
         for a in self.aliases[1:]:
             builtin[a] = proc
+        return proc
 
 
 
