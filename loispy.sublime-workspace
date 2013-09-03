@@ -4,152 +4,56 @@
 		"selected_items":
 		[
 			[
-				"method",
-				"method-names"
+				"built",
+				"builtin"
 			],
 			[
-				"load",
-				"load_libs	(global, function)"
+				"macr",
+				"macro_expand"
 			],
 			[
-				"TE",
-				"THE_GLOBAL_ENV	(imported, instance)"
-			],
-			[
-				"else",
-				"else-clause"
-			],
-			[
-				"cond",
-				"cond-cases"
-			],
-			[
-				"mae",
-				"make-cond-cases"
-			],
-			[
-				"make-",
-				"make-cond-cases"
-			],
-			[
-				"re",
-				"read(tokens)	(global, function)"
-			],
-			[
-				"num",
-				"numpositional	(attribute, instance)"
-			],
-			[
-				"rest",
-				"rest-clauses"
-			],
-			[
-				"ep",
-				"empty"
-			],
-			[
-				"pu",
-				"public-method-names"
-			],
-			[
-				"private",
-				"private-methods"
-			],
-			[
-				"make",
-				"make-symbol"
-			],
-			[
-				"Sy",
-				"Sym(s, symbol_table)	(global, function)"
-			],
-			[
-				"public",
-				"public-methods"
-			],
-			[
-				"qu",
-				"quote_shorthand	(global, instance)"
-			],
-			[
-				"get",
-				"get_exp"
-			],
-			[
-				"Inde",
-				"IndexError	(builtin, class)"
-			],
-			[
-				"_unq",
-				"_unquotesplicing	(imported, instance)"
-			],
-			[
-				"_lamb",
-				"_lambdashorthand	(imported, instance)"
+				"builtin",
+				"builtinproc"
 			],
 			[
 				"macro",
-				"macro_args	(local, instance)"
-			],
-			[
-				"first",
-				"first-consequent"
-			],
-			[
-				"_a",
-				"_lambdashorthand	(global, instance)"
-			],
-			[
-				"isla",
-				"is_lambda_shorthand"
-			],
-			[
-				"unq",
-				"unquoted_splicing(exp)	(global, function)"
-			],
-			[
-				"unqu",
-				"unquoted_splicing(exp)	(global, function)"
-			],
-			[
-				"value",
-				"value_of_quote	(local, instance)"
-			],
-			[
-				"analy",
-				"analyze_lambda(astnode)	(global, function)"
-			],
-			[
-				"anal",
-				"analyze_let(astnode)	(global, function)"
-			],
-			[
-				"make_g",
-				"make_global_env	(global, function)"
-			],
-			[
-				"analyze",
-				"analyze_procdef(exp)	(global, function)"
-			],
-			[
-				"sYMB",
-				"Symbol"
-			],
-			[
-				"_unquote",
-				"_unquote	(global, instance)"
+				"macro_args"
 			],
 			[
 				"code",
 				"codeobj"
 			],
 			[
-				"CodE",
-				"CodeObj"
+				"get",
+				"get_exp"
 			],
 			[
-				"Code",
-				"CodeObj"
+				"read",
+				"read_key"
+			],
+			[
+				"eva",
+				"evaluated_values"
+			],
+			[
+				"Sy",
+				"SyntaxError"
+			],
+			[
+				"_un",
+				"_unquotesplicing	(global, instance)"
+			],
+			[
+				"unqu",
+				"unquote-splicing"
+			],
+			[
+				"str",
+				"read_string"
+			],
+			[
+				"th",
+				"throwaway"
 			],
 			[
 				"is",
@@ -192,6 +96,10 @@
 				"apply_proc(env)	(local, function)"
 			],
 			[
+				"analyze",
+				"analyze_sequence(seq)	(global, function)"
+			],
+			[
 				"set",
 				"set_var(env)	(local, function)"
 			],
@@ -202,6 +110,10 @@
 			[
 				"Key",
 				"KeyboardInterrupt	(builtin, class)"
+			],
+			[
+				"analy",
+				"analyze_sequence(seq)	(global, function)"
 			],
 			[
 				"analyz",
@@ -270,10 +182,6 @@
 			[
 				"g",
 				"global_environment"
-			],
-			[
-				"read",
-				"read_from"
 			],
 			[
 				"page",
@@ -491,6 +399,32 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "LICENSE.txt",
+			"settings":
+			{
+				"buffer_size": 1079,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "LOIS.PY\n=======\n\nThis is my toy lisp learning project.\n\nName stands for *LO*ic's l*IS*p in *PY*thon.\n\nThe foundations of the code are heavily inspired by Abelsson, Sussman & Sussman's *Structure and Interpretation of Computer Programs* ([SICP](http://mitpress.mit.edu/sicp/)) & Peter Norvig's blogs, [lis.py](http://norvig.com/lispy.html) & [lispy.py](http://norvig.com/lispy2.html). I also sprinkled in some Clojure-like things, the implementation how-to of which intrigued me.\n\nMostly though, this will be a laboratory for me to conduct godawful experiments in lisp dialects interpretation.\n\nPhilosophy\n----------\n\nTBD\n\n\nSyntax and Datatypes\n--------------------\n\n### Procedures\n\n    >> (=> my-proc (x) ())\n    #n\n    >> my-proc\n    <Procedure my-proc>\n\n\nProcedure call syntax is like any lisp:\n\n    >> (my-proc 2)\n    4\n\n\nProcedures are first-class objects:\n\n    >> (map my-proc `(1 2 3 4 5))\n    (2 4 6 8 10)\n\nOmitting the name in the procedure definition syntax returns an anonymous procedure ('lambda')\n\n    >> (map (=> (x) (* x 2)) `(1 2 3 4 5))\n    (2 4 6 8 10)\n\n\nA clojure-like lambda shorthand syntax is provided:\n\n    >> #(* _ _)\n    <Procedure>\n    >> (reduce #(+ _1 _2) (map #(* _ _) (range 100)))\n    328350\n\n\n### Variable definition and assignment\n\n    >> ($ x 2)\n    #n\n    >> x\n    2\n    >> (set! x 4)\n    #n\n    >> x\n    4\n\n\n### Booleans & NoneType\n\n    >> ($ t #t)\n    #n\n    >> (true? #t)\n    #t\n    >> (not #t)\n    #f\n\n\n### Strings\n\nStrings are scheme-like, delimited by double quotes.\n\n    >> ($ x \"hello\")\n    #n\n    >> (string? x)\n    #t\n    >> (+ \"J\" (all-but-first (upper x)))\n    \"JELLO\"\n\n\n### Lists\n\nLoispy lists are Python lists.\n\n    >> `(1 2 a \"a\" 3.0 #t)\n    (1 2 a \"a\" 3.0 #t)\n\nThey can be declared using quotations, or the `list` built-in procedure.\n\n    >> ($ my-list (list 1 2))\n    #n\n    >> my-list\n    (1 2)\n    >> (list? my-list)\n    #t\n\n\n### Dicts\n\nLoispy dicts are python dicts.\nImplementation is currently very rough, awful & buggy.\n\n    >> {:hello \"world\" :this `is-cool :hi 5 :dat #t}\n    {:hello \"world\" :this `is-cool :hi 5 :dat #t}\n\n\nMacros\n------\n\nLoispy provides scheme-like macros, defined using the `macro=>` keyword. Macros can only be defined at top-level, or within a `begin` block that is itself at top-level. macro-expand`-like procedure is yet to be implemented, but definitely will be (most of the stuff is there...)\n\nSome of the loisp syntax (`cond`, `switch`, `let*`) is implemented using loisp macros. Here is, for instance, the macrodef for `let*`:\n\n    (macro=> let* (vars body...)\n      ;; Implements a special form for sequential variable binding.\n      (=> expand (clauses body)\n        (let ((first-clause (first clauses))\n              (rest-clauses (all-but-first clauses)))\n             (if (empty? rest-clauses)\n                 `(let (,first-clause) ,@body)\n                 `(let (,first-clause) ,(expand rest-clauses body)))))\n      (expand vars body))\n\n\n    >> (let* ((a 1) (b a)) b)\n    1\n\n\n\nTesting\n-------\n\nLoispy should probably include a test suite, but it currently doesn't.\n\nLicense\n-------\n\nLoispy is made publicly available under the terms of the [MIT License](http://www.wtfpl.net/).\n",
+			"file": "README.md",
+			"file_size": 3172,
+			"file_write_time": 1377756740000000,
+			"settings":
+			{
+				"buffer_size": 3170,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
@@ -501,10 +435,6 @@
 			[
 				"syntax lisp",
 				"Set Syntax: Lisp"
-			],
-			[
-				"syntax coff",
-				"Set Syntax: CoffeeScript"
 			],
 			[
 				"syntax pyth",
@@ -551,6 +481,10 @@
 				"Set Syntax: CoffeeScript"
 			],
 			[
+				"syntax coff",
+				"Set Syntax: CoffeeScript"
+			],
+			[
 				"install",
 				"Package Control: Install Package"
 			],
@@ -580,27 +514,29 @@
 	},
 	"file_history":
 	[
-		"/home/loic/repositories/loispy/src/analysis.py",
-		"/home/loic/repositories/loispy/src/parsing.py",
-		"/home/loic/repositories/loispy/src/stdlib/builtinmacros.loisp",
-		"/home/loic/repositories/loispy/src/codeobject.py",
-		"/home/loic/repositories/loispy/src/main.py",
-		"/home/loic/repositories/loispy/src/procedure.py",
-		"/home/loic/repositories/loispy/src/builtin.py",
-		"/home/loic/repositories/loispy/src/builtinmacros.loisp",
-		"/home/loic/repositories/loispy/src/lib",
-		"/home/loic/repositories/loispy/loispy-scripts/test_macros.loisp",
-		"/home/loic/repositories/loispy/src/environment.py",
-		"/home/loic/repositories/loispy/src/symbol.py",
-		"/home/loic/repositories/loispy/src/error.py",
+		"/Users/loic/repositories/loispy/src/parsing.py",
+		"/Users/loic/repositories/loispy/src/utils.py",
+		"/Users/loic/repositories/loispy/README.md",
+		"/Users/loic/repositories/loispy/src/symbol.py",
+		"/Users/loic/repositories/loispy/src/builtin.py",
+		"/Users/loic/repositories/loispy/src/codeobject.py",
+		"/Users/loic/repositories/loispy/src/error.py",
+		"/Users/loic/repositories/loispy/src/procedure.py",
+		"/Users/loic/repositories/loispy/src/analysis.py",
+		"/Users/loic/repositories/loispy/src/environment.py",
+		"/Users/loic/repositories/loispy/src/stdlib/builtinmacros.loisp",
+		"/Users/loic/repositories/loispy/src/main.py",
+		"/Users/loic/repositories/loispy/src/test/test_parsing.py",
+		"/Users/loic/repositories/loispy/src/native.py",
+		"/Users/loic/repositories/loispy/loispy.sublime-project",
+		"/Users/loic/repositories/loispy/src/new-parsing.py",
+		"/home/loic/repositories/loispy/loispy-scripts/funcs.loisp",
 		"/home/loic/repositories/loispy/src/utils.py",
 		"/home/loic/repositories/loispy/src/native.py",
-		"/home/loic/repositories/loispy/loispy-scripts/funcs.loisp",
-		"/home/loic/repositories/loispy/src/macro.py",
-		"/home/loic/repositories/loispy/src/test/test_parsing.py",
-		"/home/loic/repositories/loispy/loispy.sublime-project",
-		"/home/loic/repositories/loispy/src/new-parsing.py",
 		"/home/loic/repositories/sicp/interpreter.scm",
+		"/home/loic/repositories/loispy/src/main.py",
+		"/home/loic/repositories/loispy/src/parsing.py",
+		"/home/loic/repositories/loispy/src/procedure.py",
 		"/home/loic/repositories/loispy/src/loispylib/__init__.py",
 		"/home/loic/repositories/loispy/src/loispylib/debug.py",
 		"/home/loic/repositories/loispy/src/loispylib/procedure.py",
@@ -611,6 +547,7 @@
 		"/home/loic/repositories/loispy/src/loispylib/parsing.py",
 		"/home/loic/repositories/loispy/README.md",
 		"/home/loic/repositories/loispy/bin/loispy",
+		"/home/loic/repositories/loispy/src/test/test_parsing.py",
 		"/home/loic/repositories/loispy/LICENSE.txt",
 		"/home/loic/repositories/loispy/src/loispylib/test/__init__.py",
 		"/home/loic/repositories/loispy/bin/losipy",
@@ -704,87 +641,39 @@
 		"/Users/loic/Dropbox/T3L 2011-2012/python/ex36.py",
 		"/Users/loic/Dropbox/T3L 2011-2012/python/ex39.py",
 		"/Users/loic/Dropbox/T3L 2011-2012/python/ex40.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex41.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex35.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/test.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/33.py"
+		"/Users/loic/Dropbox/T3L 2011-2012/python/ex41.py"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
 		"height": 0.0,
 		"where_history":
 		[
-			"/home/loic/repositories/loispy/src"
 		]
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
-			"unquoted",
-			"begin",
-			"analyze_begin",
-			")))))",
-			"`",
-			",",
-			"read_quoted",
-			"split",
-			"_eval",
-			"numargs",
-			"quotes",
-			"type",
-			"proc_applic",
-			"is not",
-			"let",
-			"is_quoted",
-			"print",
-			"format_ex",
-			"format_exd",
-			"proced",
-			"procedure_app",
-			"vardef",
-			"let",
-			"alt",
-			"lambda_shorthand",
-			"is_tagged",
-			"shorthand",
-			"macro",
-			"unquoted",
-			"the_global_env",
-			"analyze_procedure",
-			"analyze_procecure_",
-			"analyze_getter",
-			"analyze_lambda",
-			"@builtin",
-			"from native import native",
-			"NativeProcedure",
-			"natproc",
-			"list",
-			"last",
-			"first",
-			"make_global_env",
-			"c",
-			"expand_cond",
-			"procdef",
-			"185",
 			"getter",
-			"begin",
-			"analyze_lambda",
+			"expand_cond",
+			"is_cond",
+			"macro_expand",
+			"proc?",
+			"proc",
+			"true",
 			"lambda",
-			"args",
-			"error",
-			"Sym",
-			"error",
-			"self, ",
-			"add",
-			"applicaton",
-			"analyze_procedure_application",
-			"quotation",
+			"procdef",
+			"lambda\"",
+			"lambda",
+			"get",
+			"dict_literal",
+			"_expand",
+			"atom",
 			"return  ",
 			"#     \"(.+)\": lambda (.*):(.*),",
 			"class (\\w+)\\(NativeProcedure\\):\\n    def __call__(\\(.*\\)): (.*)",
@@ -853,20 +742,31 @@
 			"mustbeat",
 			"animated",
 			"dc:title",
-			"releasetype"
+			"releasetype",
+			"dc:title",
+			"morceau",
+			"dc:title",
+			"&",
+			"&quot;",
+			"ISRC",
+			"mo:isrc",
+			"\"?>",
+			"br",
+			"http",
+			"deprecated",
+			"téléchargement",
+			"</td>",
+			"<td>",
+			"h4",
+			"release_of",
+			"type"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
-			"THE_GLOBAL_ENV",
-			"@builtinproc",
-			"from builtin import builtin",
-			"BuiltInProcedure",
-			"builtin",
-			"",
 			"return ",
 			"@natproc\\ndef \\1(\\2):\\n    return \\3\\n",
 			"@natproc\\ndef \\1(\\2):\\n    return \\3",
@@ -895,6 +795,91 @@
 	"groups":
 	[
 		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "LICENSE.txt",
+					"settings":
+					{
+						"buffer_size": 1079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								55,
+								55
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 3170,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3144,
+								3144
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2306.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
 			"sheets":
 			[
 			]
@@ -917,11 +902,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -946,120 +938,56 @@
 		"selected_items":
 		[
 			[
-				"b",
-				"src/stdlib/builtinmacros.loisp"
-			],
-			[
-				"ana",
-				"src/analysis.py"
+				"en",
+				"src/environment.py"
 			],
 			[
 				"main",
 				"src/main.py"
 			],
 			[
-				"bu",
-				"src/builtin.py"
-			],
-			[
 				"buil",
-				"src/builtin.py"
-			],
-			[
-				"",
-				"src/parsing.py"
-			],
-			[
-				"envir",
-				"src/environment.py"
-			],
-			[
-				"analy",
-				"src/analysis.py"
+				"src/stdlib/builtinmacros.loisp"
 			],
 			[
 				"proce",
 				"src/procedure.py"
 			],
 			[
-				"parsing",
-				"src/parsing.py"
-			],
-			[
-				"procedure",
-				"src/procedure.py"
-			],
-			[
-				"an",
-				"src/analysis.py"
-			],
-			[
-				"sy",
-				"src/symbol.py"
-			],
-			[
-				"pars",
-				"src/parsing.py"
-			],
-			[
-				"a",
-				"src/analysis.py"
-			],
-			[
-				"code",
-				"src/codeobject.py"
-			],
-			[
-				"bui",
-				"src/builtinmacros.loisp"
-			],
-			[
-				"buit",
-				"src/builtin.py"
-			],
-			[
-				"tes",
-				"loispy-scripts/test_macros.loisp"
-			],
-			[
-				"built",
-				"src/builtin.py"
-			],
-			[
-				"builtin",
-				"src/builtin.py"
-			],
-			[
-				"test",
-				"loispy-scripts/test_macros.loisp"
-			],
-			[
-				"envi",
-				"src/environment.py"
-			],
-			[
-				"utils",
-				"src/utils.py"
+				"err",
+				"src/error.py"
 			],
 			[
 				"error",
 				"src/error.py"
 			],
 			[
-				"syl",
-				"src/symbol.py"
+				"code",
+				"src/codeobject.py"
 			],
 			[
-				"native",
-				"src/native.py"
+				"built",
+				"src/builtin.py"
+			],
+			[
+				"utils",
+				"src/utils.py"
 			],
 			[
 				"anal",
 				"src/analysis.py"
 			],
 			[
+				"parsing",
+				"src/parsing.py"
+			],
+			[
 				"prmitive",
 				"coffee/04__primitives.litcoffee"
+			],
+			[
+				"",
+				"/Users/loic/Dropbox/T3L 2011-2012/Mémoire/tex/biblio.bib"
 			]
 		],
 		"width": 0.0
@@ -1072,10 +1000,10 @@
 		],
 		"width": 0.0
 	},
-	"show_minimap": false,
+	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 149.0,
+	"side_bar_width": 192.0,
 	"status_bar_visible": true
 }

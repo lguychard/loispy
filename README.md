@@ -142,4 +142,4 @@ Loispy should probably include a test suite, but it currently doesn't.
 License
 -------
 
-Loispy is made publicly available under the terms of the [wtfpl license](http://www.wtfpl.net/).
+Loispy is made publicly available under the terms of the [MIT License](http://www.wtfpl.net/).
