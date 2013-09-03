@@ -1,0 +1,33 @@
+/*
+THEME COLORS
+
+#206079 teal
+#284D5A greyish
+#0A3C4E darkish blue
+#549FBC light
+#70A7BC lighter
+*/
+
+.terminal {
+    position: relative;
+    background-color: #0A3C4E;
+    color: #70A7BC;
+    width: 600px;
+    height: 400px;
+    border-radius: 3px;
+}
+
+.input {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 5px;
+}
+
+#input-val {
+    display:none;
+}
+
+#display-input-val {
+    width: 440px;
+}

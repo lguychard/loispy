@@ -1,19 +1,12 @@
 jQuery ->
 
-    update_retval = (data) ->
-        clean_view()
-        if not data.error?
-            $("#retval").text data.retval
-        else
-            $("#eval_error").text data.error
+    simulate_input = ->
+        alert "hello"
+        input_real = $("#input-val")
+        input_fake = $("#display-input-val")
+        input_real.focus()
+        input_fake.text(input_real.val())
 
-    clean_view = ->
-        $("#retval").text ""
-        $("#eval_error").text ""
 
-    eval_string = ->
-        s = $("#repl_input").val()
-        $.post "/eval_string/", string:s, update_retval
 
-    $("#eval_btn").bind "click", eval_string
-
+    $(".input").bind "click", simulate_input
