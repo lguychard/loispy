@@ -23,12 +23,12 @@ def app_index():
 
 @app.route("/eval_string/", methods=["POST"])
 def eval_string():
-    s = flask.request.form["string"]
+    inval = flask.request.form["string"]
     try:
-        val = eval(s)
-        return flask.jsonify(retval=to_string(val))
+        val = eval(inval)
+        return flask.jsonify(inval=inval, outval=to_string(val))
     except Exception as e:
-        return flask.jsonify(error=e)
+        return flask.jsonify(inval=inval, error=str(e))
 
 
 @app.route("/get_env_info/", methods=["GET"])
