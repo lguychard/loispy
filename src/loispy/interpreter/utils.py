@@ -14,9 +14,16 @@ def to_string(x):
     elif isa(x, dict):
         return "{%s}" % " ".join([":%s %s" % (k, to_string(x[k])) for k in x])
     elif isinstance(x, Exception):
-        return "%s: %s" % (type(x).__name__, str(x))
+        s = "%s: %s" % (type(x).__name__, str(x))
+        if hasattr(x, "at"):
+            s += "\n    %s" % x.at
+        return s
     else:
         return str(x)
 
 def isa(x, type_):
     return type(x) is type_
+
+def add_exc_info(node, e):
+    tok = node.tok[:20] + "..." if len(node.tok) > 20 else node.tok
+    e.at = "at %s (%d:%d,%d)" % (tok, node.line, node.start, node.end)

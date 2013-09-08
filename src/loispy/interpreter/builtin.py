@@ -64,6 +64,10 @@ for p in len, min, max, range, map, reduce, filter, sys.exit:
 
 builtinproc("proc?")(op.isCallable)
 
+@builtinproc()
+def error(msg):
+    raise Exception(msg)
+
 
 @builtinproc("*")
 def multiply(*args):

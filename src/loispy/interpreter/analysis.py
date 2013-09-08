@@ -5,7 +5,7 @@ from symbol import _quote, _unquote, _quasiquote, _unquotesplicing, _let, _set,\
 from environment import Environment, THE_GLOBAL_ENV
 from procedure import Procedure
 from builtin import builtin, builtinproc
-from utils import to_string, isa
+from utils import to_string, isa, add_exc_info
 from re import findall
 
 
@@ -57,49 +57,48 @@ def analyze(astnode, toplevel=False):
 
     @returns CodeObject
     """
-    exp = astnode.exp
-    # Atomic data types and symbols
-    if self_eval(exp):
-        return CodeObject(astnode, lambda env: exp)
-    elif isa(exp, Symbol):
-        return CodeObject(astnode, lambda env: env.find(exp)[exp])
-    # Compound expressions
-    elif isa(exp, list):
-        if is_dict_literal(exp):
-            return analyze_dict_literal(astnode)
-        if is_if(exp):
-            return analyze_if(astnode)
-        elif is_begin(exp):
-            return analyze_begin(astnode, toplevel)
-        elif is_assignment(exp):
-            return analyze_assignment(astnode)
-        elif is_let(exp):
-            return analyze_let(astnode)
-        # elif is_lambda(exp):
-        #     return analyze_lambda(astnode)
-        elif is_lambda_shorthand(exp):
-            return analyze_lambda_shorthand(astnode)
-        elif is_vardef(exp):
-            return analyze_vardef(astnode)
-        elif is_procdef(exp):
-            return analyze_procdef(astnode)
-        elif is_macrodef(exp):
-            return analyze_macrodef(astnode, toplevel)
-        elif is_macro_application(exp):
-            return analyze_macro_application(astnode)
-        elif is_quoted(exp):
-            return analyze_quotation(astnode)
-        elif is_getter(exp):
-            return analyze_getter(astnode)
-        elif is_builtin_proc_application(exp):
-            return analyze_builtin_proc_application(astnode)
+    try:
+        exp = astnode.exp
+        # Atomic data types and symbols
+        if self_eval(exp):
+            return CodeObject(astnode, lambda env: exp)
+        elif isa(exp, Symbol):
+            return CodeObject(astnode, lambda env: env.find(exp)[exp])
+        # Compound expressions
+        elif isa(exp, list):
+            if is_dict_literal(exp):
+                return analyze_dict_literal(astnode)
+            if is_if(exp):
+                return analyze_if(astnode)
+            elif is_begin(exp):
+                return analyze_begin(astnode, toplevel)
+            elif is_assignment(exp):
+                return analyze_assignment(astnode)
+            elif is_let(exp):
+                return analyze_let(astnode)
+            elif is_lambda_shorthand(exp):
+                return analyze_lambda_shorthand(astnode)
+            elif is_vardef(exp):
+                return analyze_vardef(astnode)
+            elif is_procdef(exp):
+                return analyze_procdef(astnode)
+            elif is_macrodef(exp):
+                return analyze_macrodef(astnode, toplevel)
+            elif is_macro_application(exp):
+                return analyze_macro_application(astnode)
+            elif is_quoted(exp):
+                return analyze_quotation(astnode)
+            elif is_builtin_proc_application(exp):
+                return analyze_builtin_proc_application(astnode)
+            else:
+                # If we haven't been able to determine an expression type so far,
+                # we assume that it is a procedure call.
+                return analyze_procedure_application(astnode)
         else:
-            # If we haven't been able to determine an expression type so far,
-            # we assume that it is a procedure call.
-            return analyze_procedure_application(astnode)
-    else:
-        raise TypeError("Unknown expression type: %s, %s" %
-                                                (str(type(exp)), exp))
+            raise TypeError("Unknown expression type: %s" % to_string(exp))
+    except Exception as e:
+        add_exc_info(astnode, e)
+        raise e
 
 
 # ----------------
@@ -118,7 +117,11 @@ class CodeObject(object):
             val = self.code(env)
             return val
         except Exception as e:
-            raise NotImplementedError
+            if not hasattr(e, 'at'):
+                add_exc_info(self.node, e)
+                raise e
+
+
 
 
 # --------------------------
@@ -167,9 +170,6 @@ def is_vardef(exp):
 def is_procdef(exp):
     return is_tagged(exp, _procdef)
 
-# def is_lambda(exp):
-#     return is_tagged(exp, _lambda)
-
 def is_lambda_shorthand(exp):
     return is_tagged(exp, _lambdashorthand)
 
@@ -197,9 +197,6 @@ def is_macro_application(exp):
 
 def is_builtin_proc_application(exp):
     return type(exp[0].exp) == Symbol and exp[0].exp in builtin
-
-def is_getter(exp):
-    return type(exp[0].exp) == Symbol and Sym(exp[0].exp)[0] == "."
 
 def is_assignment(exp):
     return is_tagged(exp, _set)
@@ -292,12 +289,6 @@ def analyze_procdef(astnode):
     else:
         procname, args, body = "", exp[1].get_exp(), exp[2:]
         return CodeObject(astnode, make_proc(args, body, procname))
-
-
-# def analyze_lambda(astnode):
-#     exp = astnode.exp
-#     args, body = exp[1].get_exp(), exp[2:]
-#     return CodeObject(astnode, make_proc(args, body))
 
 
 def analyze_lambda_shorthand(astnode):

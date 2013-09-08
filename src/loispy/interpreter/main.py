@@ -26,8 +26,8 @@ def repl(env=THE_GLOBAL_ENV, debug=False):
             val = eval(_str, env)
         except Exception as e:
             val = e
-            if debug:
-                print traceback.format_exc()
+            # if debug:
+            #     print traceback.format_exc()
         print to_string(val)
     print "===============\nlois.py v.0.0.1\n==============="
     while True:
@@ -60,7 +60,7 @@ def make_argparser():
 
 
 def load_libs():
-    load("./../src/stdlib/builtinmacros.loisp", THE_GLOBAL_ENV)
+    load("./stdlib/builtinmacros.loisp", THE_GLOBAL_ENV)
 
 
 def main():
