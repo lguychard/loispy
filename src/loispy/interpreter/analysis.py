@@ -1,13 +1,10 @@
 from parsing import parse, AstNode
 from symbol import Symbol, Sym
 from symbol import _quote, _unquote, _quasiquote, _unquotesplicing, _let, _set,\
-            _else, _lambdashorthand, _if, _begin, _vardef, _procdef, \
-            _macrodef, _dict, _key
+            _lambdashorthand, _if, _begin, _vardef, _procdef, _macrodef, _dict
 from environment import Environment, THE_GLOBAL_ENV
 from procedure import Procedure
-from codeobject import CodeObject
 from builtin import builtin, builtinproc
-from error import error, Error
 from utils import to_string, isa
 from re import findall
 
@@ -103,6 +100,25 @@ def analyze(astnode, toplevel=False):
     else:
         raise TypeError("Unknown expression type: %s, %s" %
                                                 (str(type(exp)), exp))
+
+
+# ----------------
+# CODEOBJECT CLASS
+# ----------------
+
+
+class CodeObject(object):
+
+    def __init__(self, astnode, code):
+        self.node, self.code = astnode, code
+
+    def exec_(self, env):
+        """ Run the analyzed code in the context of an environment """
+        try:
+            val = self.code(env)
+            return val
+        except Exception as e:
+            raise NotImplementedError
 
 
 # --------------------------
@@ -231,7 +247,7 @@ def analyze_let(astnode):
     exp = astnode.exp
     varexp = exp[1].exp
     if not len(varexp) or not all([len(node.exp) == 2 for node in varexp]):
-        return error("Invalid vars for let: '%s'" % exp[1].tok)
+        raise ValueError("Invalid vars for let: '%s'" % exp[1].tok)
     varnames = map(lambda node: node.exp[0].exp, varexp)
     analyzed = map(lambda node: analyze(node.exp[1]), varexp)
     exps = analyze_sequence(exp[2:])
@@ -359,33 +375,14 @@ def expand_unquoted_splicing(exp, env):
         yield item
 
 
-def analyze_getter(astnode):
-    exp = astnode.exp
-    attr = exp[0].exp[1:]
-    obj = analyze(exp[1])
-    def _getattr(env):
-        try:
-            _obj = obj.exec_(env)
-            _attr = getattr(_obj, attr)
-        except AttributeError:
-            return error("%s '%s' has no field '%s'" % (
-                                type(_obj).__name__, _obj, attr))
-        return _attr
-    return CodeObject(astnode, _getattr)
-
-
 def analyze_assignment(astnode):
     exp = astnode.exp
     if len(exp) != 3:
-        return CodeObject(astnode,
-                          lambda env: error("'set!' only takes two arguments"))
+        raise ValueError("Invalid arguments for set!")
     else:
         var, val = exp[1].exp, analyze(exp[2])
         def set_(env):
-            try:
-                enclosing = env.find(var)
-            except NameError as e:
-                return Error(exc=e)
+            enclosing = env.find(var)
             enclosing.set(var, val.exec_(env))
         return CodeObject(astnode, set_)
 
@@ -428,7 +425,7 @@ def analyze_macrodef(astnode, toplevel):
 
 
 def macro_expand(macro, macro_args):
-    return macro_table.get(macro)(*exp)
+    return macro_table.get(macro)(*macro_args)
 
 
 def analyze_macro_application(astnode):

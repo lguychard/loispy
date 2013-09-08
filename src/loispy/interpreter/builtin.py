@@ -1,9 +1,7 @@
 import operator as op
 import sys
 from symbol import Symbol, Sym
-from error import error
 from utils import to_string
-import math
 
 
 # ------------------------------------------------------
@@ -60,7 +58,7 @@ class builtinproc(object):
 #-------------------------------
 
 
-for p in len, min, max, range, map, reduce, filter, sys.exit, error:
+for p in len, min, max, range, map, reduce, filter, sys.exit:
     builtinproc()(p)
 
 
@@ -70,7 +68,7 @@ builtinproc("proc?")(op.isCallable)
 @builtinproc("*")
 def multiply(*args):
     if not len(args) > 1:
-        return error("Expected at least 2 arguments, got %d" % len(args))
+        raise Exception("Expected at least 2 arguments, got %d" % len(args))
     else:
         return reduce(op.mul, args)
 
@@ -78,14 +76,14 @@ def multiply(*args):
 @builtinproc("eq?", "=")
 def equals(*args):
     if not len(args) == 2:
-        return error("Expected 2 arguments, got %d" % len(args))
+        raise Exception("Expected 2 arguments, got %d" % len(args))
     else:
         return op.eq(*args)
 
 @builtinproc("-")
 def substract(*args):
     if not len(args) > 1:
-        return error("Expected at least 2 arguments, got %d" % len(args))
+        raise Exception("Expected at least 2 arguments, got %d" % len(args))
     else:
         return reduce(op.sub, args)
 

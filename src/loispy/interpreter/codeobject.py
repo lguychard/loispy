@@ -1,6 +1,3 @@
-from error import Error
-
-
 class CodeObject(object):
 
     def __init__(self, astnode, code):
@@ -11,9 +8,5 @@ class CodeObject(object):
         try:
             val = self.code(env)
             return val
-        except Error as e:
-            if e.codeobj is None:
-                e.codeobj = self
-                raise e
         except Exception as e:
-            raise Error(codeobj=self, exc=e)
+            raise NotImplementedError
