@@ -1,0 +1,14 @@
+(=> run-test (test)
+  (let* ((expression (first test))
+        (result (eval expression))
+        (expected-result (last test)))
+    (print expression " >>> " result)
+    (if (!= result expected-result)
+        (print "FAIL - EXPECTED " expected-result)
+        (print "OK"))))
+
+($ tests `(
+  ((parse "($ x 2)") `(($ x 2)))
+))
+
+(map run-test tests)

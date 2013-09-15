@@ -1,0 +1,72 @@
+(=> compile (exp)
+  (cond
+    ((self-eval? exp) exp)
+    ((symbol? exp) (compile-symbol exp))
+    ((begin? exp) (compile-begin exp))
+    ((if? exp) (compile-if exp))
+    ((let? exp) (compile-let exp))
+    ((lambda-shorthand? exp) (compile-lambda-shorthand exp))
+    ((vardef? exp) (compile-vardef exp))
+    ((procdef? exp) (compile-procdef exp))
+    ((quoted? exp) (compile-quoted exp))
+    (else (compile-proc-application exp))))
+
+(=> self-eval? (exp)
+  (or
+    (int? exp)
+    (float? exp)
+    (string? exp)
+    (boolean? exp)
+    (none? exp)))
+
+(=> tagged? (exp tag) (= (first exp) tag))
+
+(=> begin? (exp) (tagged? exp 'begin))
+
+(=> if? (exp) (tagged? exp 'if))
+
+(=> let? (exp) (tagged? exp 'let))
+
+(=> lambda-shorthand? (exp) (tagged? exp 'pound))
+
+(=> vardef? (exp) (tagged? exp '$))
+
+(=> procdef? (exp) (tagged? exp '=>))
+
+(=> macrodef? (exp) (tagged? exp 'macro=>))
+
+(=> quoted? (exp) (tagged? exp 'quote))
+
+(=> indent (lines level)
+  (map #(+ (* level "    ") _) lines))
+
+(=> sanitize (symbol)
+  (let ((pairs `(("-" "_") ("$" "dollar_") ("#" "pound_") ("=" "equals_")))
+        (s symbol))
+    (=> repl (pair)
+        (set! s (replace s (first pair) (last pair)))
+        'ok)
+    (map #(repl _) pairs)
+    s))
+
+(=> compile-vardef (exp)
+  (print "compiling vardef:" exp)
+  (let ((varname (sanitize (nth exp 2)))
+        (varvalue (last exp)))
+      (+ varname " = " varvalue)))
+
+(=> compile-symbol (exp) (sanitize exp))
+
+(=> compile-begin (exp) (error "not implemented!"))
+
+(=> compile-if (exp) (error "not implemented!"))
+
+(=> compile-let (exp) (error "not implemented!"))
+
+(=> compile-lambda-shorthand (exp) (error "not implemented!"))
+
+(=> compile-procdef (exp) (error "not implemented!"))
+
+(=> compile-quoted (exp) (error "not implemented!"))
+
+(=> compile-proc-application (exp) (error "not implemented!"))

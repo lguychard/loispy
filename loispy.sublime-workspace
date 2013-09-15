@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"compile-proc",
+				"compile-proc-application"
+			],
+			[
+				"body",
+				"bodyAndSubject"
+			],
+			[
+				"regEx",
+				"regExesIdx"
+			],
+			[
+				"co",
+				"computed"
+			],
+			[
+				"bacg",
+				"background-color"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"table",
+				"table-cell"
+			],
+			[
+				"string",
+				"string_to_eval"
+			],
+			[
 				"built",
 				"builtin"
 			],
@@ -408,10 +440,7 @@
 			}
 		},
 		{
-			"contents": "LOIS.PY\n=======\n\nThis is my toy lisp learning project.\n\nName stands for *LO*ic's l*IS*p in *PY*thon.\n\nThe foundations of the code are heavily inspired by Abelsson, Sussman & Sussman's *Structure and Interpretation of Computer Programs* ([SICP](http://mitpress.mit.edu/sicp/)) & Peter Norvig's blogs, [lis.py](http://norvig.com/lispy.html) & [lispy.py](http://norvig.com/lispy2.html). I also sprinkled in some Clojure-like things, the implementation how-to of which intrigued me.\n\nMostly though, this will be a laboratory for me to conduct godawful experiments in lisp dialects interpretation.\n\nPhilosophy\n----------\n\nTBD\n\n\nSyntax and Datatypes\n--------------------\n\n### Procedures\n\n    >> (=> my-proc (x) ())\n    #n\n    >> my-proc\n    <Procedure my-proc>\n\n\nProcedure call syntax is like any lisp:\n\n    >> (my-proc 2)\n    4\n\n\nProcedures are first-class objects:\n\n    >> (map my-proc `(1 2 3 4 5))\n    (2 4 6 8 10)\n\nOmitting the name in the procedure definition syntax returns an anonymous procedure ('lambda')\n\n    >> (map (=> (x) (* x 2)) `(1 2 3 4 5))\n    (2 4 6 8 10)\n\n\nA clojure-like lambda shorthand syntax is provided:\n\n    >> #(* _ _)\n    <Procedure>\n    >> (reduce #(+ _1 _2) (map #(* _ _) (range 100)))\n    328350\n\n\n### Variable definition and assignment\n\n    >> ($ x 2)\n    #n\n    >> x\n    2\n    >> (set! x 4)\n    #n\n    >> x\n    4\n\n\n### Booleans & NoneType\n\n    >> ($ t #t)\n    #n\n    >> (true? #t)\n    #t\n    >> (not #t)\n    #f\n\n\n### Strings\n\nStrings are scheme-like, delimited by double quotes.\n\n    >> ($ x \"hello\")\n    #n\n    >> (string? x)\n    #t\n    >> (+ \"J\" (all-but-first (upper x)))\n    \"JELLO\"\n\n\n### Lists\n\nLoispy lists are Python lists.\n\n    >> `(1 2 a \"a\" 3.0 #t)\n    (1 2 a \"a\" 3.0 #t)\n\nThey can be declared using quotations, or the `list` built-in procedure.\n\n    >> ($ my-list (list 1 2))\n    #n\n    >> my-list\n    (1 2)\n    >> (list? my-list)\n    #t\n\n\n### Dicts\n\nLoispy dicts are python dicts.\nImplementation is currently very rough, awful & buggy.\n\n    >> {:hello \"world\" :this `is-cool :hi 5 :dat #t}\n    {:hello \"world\" :this `is-cool :hi 5 :dat #t}\n\n\nMacros\n------\n\nLoispy provides scheme-like macros, defined using the `macro=>` keyword. Macros can only be defined at top-level, or within a `begin` block that is itself at top-level. macro-expand`-like procedure is yet to be implemented, but definitely will be (most of the stuff is there...)\n\nSome of the loisp syntax (`cond`, `switch`, `let*`) is implemented using loisp macros. Here is, for instance, the macrodef for `let*`:\n\n    (macro=> let* (vars body...)\n      ;; Implements a special form for sequential variable binding.\n      (=> expand (clauses body)\n        (let ((first-clause (first clauses))\n              (rest-clauses (all-but-first clauses)))\n             (if (empty? rest-clauses)\n                 `(let (,first-clause) ,@body)\n                 `(let (,first-clause) ,(expand rest-clauses body)))))\n      (expand vars body))\n\n\n    >> (let* ((a 1) (b a)) b)\n    1\n\n\n\nTesting\n-------\n\nLoispy should probably include a test suite, but it currently doesn't.\n\nLicense\n-------\n\nLoispy is made publicly available under the terms of the [MIT License](http://www.wtfpl.net/).\n",
 			"file": "README.md",
-			"file_size": 3172,
-			"file_write_time": 1377756740000000,
 			"settings":
 			{
 				"buffer_size": 3170,
@@ -419,9 +448,48 @@
 			}
 		},
 		{
+			"file": "src/loispy/interpreter/main.py",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 2031,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "import operator as op\nimport sys\nfrom symbol import Symbol, Sym\nfrom utils import to_string\nfrom parsing import parse\n\n\n# ------------------------------------------------------\n# GLOBAL builtin DICT: BUILT-IN PROCEDURES AND CONSTANTS\n# ------------------------------------------------------\n\n\nbuiltin = {\n    \"#t\": True,\n    \"#f\": False,\n    \"#n\": None\n}\n\n\n\n# ---------------\n# UTILITY CLASSES\n# ---------------\n\n\nclass BuiltInProcedure(object):\n\n    def __init__(self, func):\n        self.func = func\n\n    def __str__(self):\n        return \"<Built-In Procedure %s>\" % self.__class__.__name__\n\n    __repr__ = __str__\n\n    def __call__(self, *args):\n        return self.func(*args)\n\n\nclass builtinproc(object):\n    \"\"\"\n    This class is meant to be instantiated as a decorator.\n    \"\"\"\n    def __init__(self, *aliases):\n        self.aliases = aliases\n\n    def __call__(self, func):\n        procname = self.aliases[0] if self.aliases else func.__name__\n        proc = type(procname, (BuiltInProcedure,), {})(func)\n        builtin[procname] = proc\n        for a in self.aliases[1:]:\n            builtin[a] = proc\n        return proc\n\n\n\n#-------------------------------\n# BUILT-IN PROCEDURE DEFINITIONS\n#-------------------------------\n\n\nfor p in len, min, max, range, map, reduce, filter, sys.exit:\n    builtinproc()(p)\n\n\nbuiltinproc(\"proc?\")(op.isCallable)\n\n@builtinproc()\ndef error(msg):\n    raise Exception(msg)\n\n\n@builtinproc(\"*\")\ndef multiply(*args):\n    if not len(args) > 1:\n        raise Exception(\"Expected at least 2 arguments, got %d\" % len(args))\n    else:\n        return reduce(op.mul, args)\n\n\n@builtinproc(\"eq?\", \"=\")\ndef equals(*args):\n    if not len(args) == 2:\n        raise Exception(\"Expected 2 arguments, got %d\" % len(args))\n    else:\n        return op.eq(*args)\n\n@builtinproc(\"-\")\ndef substract(*args):\n    if not len(args) > 1:\n        raise Exception(\"Expected at least 2 arguments, got %d\" % len(args))\n    else:\n        return reduce(op.sub, args)\n\n@builtinproc(\"neq?\", \"!=\")\ndef not_equals(*args):\n    assert len(args) == 2, \"Expected 2 arguments, got %d\" % len(args)\n    return op.__ne__(*args)\n\n@builtinproc(\"+\")\ndef add(*args):\n    assert len(args) > 1, \"Expected at least 2 arguments, got %d\" % len(args)\n    return reduce(op.add, args)\n\n@builtinproc(\"/\")\ndef divide(*args):\n    assert len(args) > 1, \"Expected at least 2 arguments, got %d\" % len(args)\n    return reduce(op.div, args)\n\n@builtinproc(\"not\")\ndef logical_not(pred):\n    return not pred\n\n@builtinproc(\"and\")\ndef logical_and(*args):\n    if len(args) == 1 and type(args[0]) is list:\n        return all(map(lambda a: a is True, args[0]))\n    elif len(args) > 1:\n        return all(map(lambda a: a is True, args))\n    else:\n        raise ValueError(\"Wrong number of arguments for and (%d)\" % len(args))\n\n@builtinproc(\"or\")\ndef logical_or(*args):\n    assert len(args) > 1, \"Expected at least 2 arguments, got %d\" % len(args)\n    return any(args)\n\n@builtinproc(\"true?\")\ndef is_true(x):\n    return x == True\n\n@builtinproc(\"false?\")\ndef is_false(x):\n    return not x\n\n@builtinproc(\"empty?\")\ndef is_empty(x):\n    return not len(x)\n\n@builtinproc(\"none?\")\ndef null(x):\n    return x is None\n\n@builtinproc(\"even?\")\ndef even(x):\n    return not x % 2\n\n@builtinproc(\"odd?\")\ndef odd(x):\n    return bool(x % 2)\n\n@builtinproc(\"print\")\ndef print_(*data):\n    print \" \".join([to_string(x) for x in data])\n\n@builtinproc(\"make-symbol\")\ndef make_symbol(_str):\n    return Sym(_str)\n\n\n# ----------------------\n# Manipulating iterables\n# ----------------------\n\n\n@builtinproc()\ndef nth(lst, idx):\n    return lst[idx]\n\n@builtinproc()\ndef last(lst):\n    return lst[-1]\n\n@builtinproc()\ndef first(lst):\n    return lst[0]\n\n@builtinproc(\"take-from\")\ndef take_from(lst, idx):\n    return lst[idx:]\n\n@builtinproc(\"take-until\")\ndef take_until(lst, idx):\n    return lst[:idx]\n\n@builtinproc(\"all-but-last\")\ndef all_but_last(lst):\n    return lst[:len(lst) - 1]\n\n@builtinproc(\"all-but-first\")\ndef all_but_first(lst):\n    return lst[1:]\n\n@builtinproc(\"list\")\ndef list_(*args):\n    return list(args) if args else []\n\n@builtinproc(\"contains?\")\ndef contains(x, y):\n    return y in x\n\n\n# ------------------\n# MANIPULATING DICTS\n# ------------------\n\n@builtinproc()\ndef get(dct, key):\n    if type(dct) is not dict:\n        raise TypeError(\"%s... is not a dict\" % to_string(dct)[:15])\n    return dct[key]\n\n@builtinproc(\"set-val\")\ndef set_val(dct, key, val):\n    if type(dct) is not dict:\n        raise TypeError(\"%s... is not a dict\" % to_string(dct)[:15])\n    dct[key] = val\n\n@builtinproc()\ndef keys(dct):\n    if type(dct) is not dict:\n        raise TypeError(\"%s... is not a dict\" % to_string(dct)[:15])\n    return dct.keys()\n\n@builtinproc()\ndef values(dct):\n    if type(dct) is not dict:\n        raise TypeError(\"%s... is not a dict\" % to_string(dct)[:15])\n    return dct.values()\n\n@builtinproc()\ndef items(dct):\n    if type(dct) is not dict:\n        raise TypeError(\"%s... is not a dict\" % to_string(dct)[:15])\n    return dct.items()\n\n\n\n# ------------------------------------\n# TYPE PREDICATES - mutually exclusive\n# ------------------------------------\n\n\n@builtinproc(\"type\")\ndef type_(arg):\n    return type(arg)\n\n@builtinproc(\"list?\")\ndef is_list(arg):\n    return type(arg) is list\n\n@builtinproc(\"dict?\")\ndef is_dict(arg):\n    return type(arg) is dict\n\n@builtinproc(\"symbol?\")\ndef is_symbol(arg):\n    return type(arg) is Symbol\n\n@builtinproc(\"int?\")\ndef is_int(arg):\n    return type(arg) is int\n\n@builtinproc(\"float?\")\ndef is_float(arg):\n    return type(arg) is float\n\n@builtinproc(\"string?\")\ndef is_str(arg):\n    return type(arg) is str\n\n@builtinproc(\"boolean?\")\ndef is_boolean(arg):\n    return type(arg) is bool\n\n@builtinproc(\"none?\")\ndef is_none(arg):\n    return type(arg) is type(None)\n\n@builtinproc(\"parse\")\ndef _parse(_str):\n    return [node.get_exp() for node in parse(_str)]\n\n@builtinproc()\ndef replace(_str, pattern, value):\n    return _str.replace(pattern, value)\n\n@builtinproc()\ndef split(_str, pattern):\n    return _str.split(pattern)\n\n@builtinproc()\ndef join(lst, _str):\n    return _str.join()",
+			"file": "src/loispy/interpreter/builtin.py",
+			"file_size": 6057,
+			"file_write_time": 1378662580000000,
+			"settings":
+			{
+				"buffer_size": 6054,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispy/interpreter/analysis.py",
+			"settings":
+			{
+				"buffer_size": 12831,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "(=> run-test (test)\n  (let* ((expression (first test))\n        (result (eval expression))\n        (expected-result (last test)))\n    (print expression \" >>> \" result)\n    (if (!= result expected-result)\n        (print \"FAIL - EXPECTED \" expected-result)\n        (print \"OK\"))))\n\n($ tests `(\n  (\"(parse \\\"($ x 2)\\\")\" `(($ x 2)))\n))\n\n(map run-test tests)",
+			"file": "src/loispy/interpreter/tests/test.loisp",
+			"file_size": 348,
+			"file_write_time": 1378709034000000,
+			"settings":
+			{
+				"buffer_size": 352,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/loispy/interpreter/stdlib/compile.loisp",
+			"settings":
+			{
+				"buffer_size": 1817,
 				"line_ending": "Unix"
 			}
 		}
@@ -429,12 +497,20 @@
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 75.0,
+		"height": 67.0,
 		"selected_items":
 		[
 			[
 				"syntax lisp",
 				"Set Syntax: Lisp"
+			],
+			[
+				"syntax cof",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"syntax coffeee",
+				"Set Syntax: CoffeeScript (Literate)"
 			],
 			[
 				"syntax pyth",
@@ -473,10 +549,6 @@
 				"Set Syntax: CoffeeScript"
 			],
 			[
-				"syntax cof",
-				"Set Syntax: CoffeeScript"
-			],
-			[
 				"syntax cofe",
 				"Set Syntax: CoffeeScript"
 			],
@@ -497,7 +569,7 @@
 				"Code Folding: Unfold All"
 			]
 		],
-		"width": 449.0
+		"width": 485.0
 	},
 	"console":
 	{
@@ -514,6 +586,25 @@
 	},
 	"file_history":
 	[
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/analysis.py",
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/utils.py",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/app.py",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/templates/index.html",
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/error.py",
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/symbol.py",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/static/js/app.js",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/static/js/app.coffee",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/static/css/app.css",
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/codeobject.py",
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/builtin.py",
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/main.py",
+		"/Users/loic/repositories/loispy/bin/loispy",
+		"/Users/loic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/static/js/jquery-1.10.2.min.js",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/main.py",
+		"/Users/loic/repositories/loispy/src/loispy/__init__.py",
+		"/Users/loic/repositories/loispy/src/loispy/webapp/__init__.py",
+		"/Users/loic/repositories/loispy/src/loispy/interpreter/__init__.py",
 		"/Users/loic/repositories/loispy/src/parsing.py",
 		"/Users/loic/repositories/loispy/src/utils.py",
 		"/Users/loic/repositories/loispy/README.md",
@@ -573,7 +664,6 @@
 		"/Users/loic/Dropbox/Loic/test_booleano/QueryManager.py",
 		"/Users/loic/Dropbox/Loic/formsapp/formserve.py",
 		"/Users/loic/Dropbox/Loic/formsapp/LexicalFieldManager.py",
-		"/Users/loic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/loic/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/loic/repositories/phantombuyer/NavigationController.js",
 		"/Users/loic/repositories/phantombuyer/OrderHandler.js",
@@ -623,25 +713,7 @@
 		"/Users/loic/Documents/dev/html/style.css",
 		"/Users/loic/Documents/workspace/playingWithClasses/untitled.tex",
 		"/Users/loic/Dropbox/T3L 2011-2012/python/printMyName.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/java/beersong.java",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/beersong.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/phraseomatic.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/tiddlylisp.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/xqtest.xq",
-		"/Users/loic/Dropbox/T3L 2011-2012/xq.xq",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/notlispy.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/numericBooleans.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ifStatement.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/assignmentOperator.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/chainingAssignments.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/augmentedAssignment.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/pythonFalseValues",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/multipleAssignment.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/augmentedAssignment",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex36.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex39.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex40.py",
-		"/Users/loic/Dropbox/T3L 2011-2012/python/ex41.py"
+		"/Users/loic/Dropbox/T3L 2011-2012/java/beersong.java"
 	],
 	"find":
 	{
@@ -652,6 +724,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"/Users/loic/repositories/loispy/src/loispy/interpreter"
 		]
 	},
 	"find_state":
@@ -659,6 +732,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"eval",
+			"d",
+			"analyze_let",
+			"d",
+			"error",
+			"from error",
+			"\n",
+			"\"",
 			"getter",
 			"expand_cond",
 			"is_cond",
@@ -767,6 +848,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"'",
 			"return ",
 			"@natproc\\ndef \\1(\\2):\\n    return \\3\\n",
 			"@natproc\\ndef \\1(\\2):\\n    return \\3",
@@ -795,7 +877,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -847,29 +929,115 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2306.0,
+						"translation.y": 349.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "src/loispy/interpreter/main.py",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 2031,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1731,
+								1731
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 1.0,
+						"translation.y": 765.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/loispy/interpreter/builtin.py",
+					"settings":
+					{
+						"buffer_size": 6054,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3184,
+								3186
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/loispy/interpreter/analysis.py",
+					"settings":
+					{
+						"buffer_size": 12831,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10619,
+								10619
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 325.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/loispy/interpreter/tests/test.loisp",
+					"settings":
+					{
+						"buffer_size": 352,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								312,
+								312
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -880,8 +1048,37 @@
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 6,
+					"file": "src/loispy/interpreter/stdlib/compile.loisp",
+					"settings":
+					{
+						"buffer_size": 1817,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1346,
+								1346
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lisp/Lisp.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -913,7 +1110,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.444159613715,
 			1.0
 		],
 		"rows":
@@ -938,6 +1135,18 @@
 		"selected_items":
 		[
 			[
+				"analy",
+				"src/loispy/interpreter/analysis.py"
+			],
+			[
+				"error",
+				"src/loispy/interpreter/error.py"
+			],
+			[
+				"parsing",
+				"src/loispy/interpreter/parsing.py"
+			],
+			[
 				"en",
 				"src/environment.py"
 			],
@@ -958,10 +1167,6 @@
 				"src/error.py"
 			],
 			[
-				"error",
-				"src/error.py"
-			],
-			[
 				"code",
 				"src/codeobject.py"
 			],
@@ -976,10 +1181,6 @@
 			[
 				"anal",
 				"src/analysis.py"
-			],
-			[
-				"parsing",
-				"src/parsing.py"
 			],
 			[
 				"prmitive",

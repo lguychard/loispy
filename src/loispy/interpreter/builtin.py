@@ -2,6 +2,7 @@ import operator as op
 import sys
 from symbol import Symbol, Sym
 from utils import to_string
+from parsing import parse
 
 
 # ------------------------------------------------------
@@ -275,3 +276,19 @@ def is_boolean(arg):
 @builtinproc("none?")
 def is_none(arg):
     return type(arg) is type(None)
+
+@builtinproc("parse")
+def _parse(_str):
+    return [node.get_exp() for node in parse(_str)]
+
+@builtinproc()
+def replace(_str, pattern, value):
+    return _str.replace(pattern, value)
+
+@builtinproc()
+def split(_str, pattern):
+    return _str.split(pattern)
+
+@builtinproc()
+def join(lst, _str):
+    return _str.join(lst)
