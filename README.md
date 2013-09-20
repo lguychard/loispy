@@ -9,10 +9,6 @@ The foundations of the code are heavily inspired by Abelsson, Sussman & Sussman'
 
 Mostly though, this will be a laboratory for me to conduct godawful experiments in lisp dialects interpretation.
 
-Philosophy
-----------
-
-TBD
 
 
 Syntax and Datatypes
