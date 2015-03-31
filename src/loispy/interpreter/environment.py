@@ -1,5 +1,5 @@
-from builtin import builtin
-
+from builtin import BUILTIN, builtinproc
+from symbol import Sym
 
 class Environment(dict):
     """
@@ -44,4 +44,15 @@ class Environment(dict):
 # environment to the primitive addition procedure.'
 # [ABELSON et al., 1996]
 
-THE_GLOBAL_ENV = Environment(builtin)
+THE_GLOBAL_ENV = Environment()
+
+@builtinproc("py-import")
+def py_import(module_name, alias=None):
+    module = __import__(module_name)
+    THE_GLOBAL_ENV[Sym(alias or module_name)] = module
+
+@builtinproc("import")
+def import_(module_name, alias):
+    raise NotImplementedError()
+
+THE_GLOBAL_ENV.update(BUILTIN)

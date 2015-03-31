@@ -1,10 +1,10 @@
 from parsing import parse, AstNode
 from symbol import Symbol, Sym
 from symbol import _quote, _unquote, _quasiquote, _unquotesplicing, _let, _set,\
-            _lambdashorthand, _if, _begin, _vardef, _procdef, _macrodef, _dict
+            _lambdashorthand, _if, _begin, _vardef, _procdef, _macrodef, _dict, _attr_access
 from environment import Environment, THE_GLOBAL_ENV
 from procedure import Procedure
-from builtin import builtin, builtinproc
+from builtin import BUILTIN, builtinproc
 from utils import to_string, isa, add_exc_info
 from re import findall
 
@@ -90,6 +90,8 @@ def analyze(astnode, toplevel=False):
                 return analyze_quotation(astnode)
             elif is_builtin_proc_application(exp):
                 return analyze_builtin_proc_application(astnode)
+            elif is_attribute_access(exp):
+                return analyze_attribute_access(astnode)
             else:
                 # If we haven't been able to determine an expression type so far,
                 # we assume that it is a procedure call.
@@ -173,6 +175,9 @@ def is_procdef(exp):
 def is_lambda_shorthand(exp):
     return is_tagged(exp, _lambdashorthand)
 
+def is_attribute_access(exp):
+    return is_tagged(exp, _attr_access)
+
 def is_macrodef(exp):
     return is_tagged(exp, _macrodef)
 
@@ -196,7 +201,7 @@ def is_macro_application(exp):
     return any([is_tagged(exp, macro) for macro in macro_table])
 
 def is_builtin_proc_application(exp):
-    return type(exp[0].exp) == Symbol and exp[0].exp in builtin
+    return type(exp[0].exp) == Symbol and exp[0].exp in BUILTIN
 
 def is_assignment(exp):
     return is_tagged(exp, _set)
@@ -260,6 +265,17 @@ def analyze_let(astnode):
     return CodeObject(astnode, _let)
 
 
+def analyze_attribute_access(astnode):
+    attrs = astnode.exp[1:]
+    if not attrs:
+        raise ValueError("Empty attribute access sequence")
+    def getter(env):
+        ret = env[attrs.pop(0).exp]
+        while attrs:
+            ret = getattr(ret, attrs.pop(0).exp)
+        return ret
+    return CodeObject(astnode, getter)
+
 def analyze_sequence(seq):
     exps = [analyze(e) for e in seq]
     last = exps.pop()
@@ -319,7 +335,7 @@ def analyze_builtin_proc_application(astnode):
     Used to bypass the environment lookup for builtin procedures
     """
     exp = astnode.exp
-    proc = builtin[exp[0].exp]
+    proc = BUILTIN[exp[0].exp]
     args = [analyze(node) for node in exp[1:]]
     return CodeObject(astnode, lambda env: proc(*[a.exec_(env) for a in args]))
 

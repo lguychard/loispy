@@ -4,13 +4,12 @@ from symbol import Symbol, Sym
 from utils import to_string
 from parsing import parse
 
-
 # ------------------------------------------------------
-# GLOBAL builtin DICT: BUILT-IN PROCEDURES AND CONSTANTS
+# GLOBAL BUILTIN DICT: BUILT-IN PROCEDURES AND CONSTANTS
 # ------------------------------------------------------
 
 
-builtin = {
+BUILTIN = {
     "#t": True,
     "#f": False,
     "#n": None
@@ -47,9 +46,9 @@ class builtinproc(object):
     def __call__(self, func):
         procname = self.aliases[0] if self.aliases else func.__name__
         proc = type(procname, (BuiltInProcedure,), {})(func)
-        builtin[procname] = proc
+        BUILTIN[procname] = proc
         for a in self.aliases[1:]:
-            builtin[a] = proc
+            BUILTIN[a] = proc
         return proc
 
 
@@ -198,6 +197,10 @@ def list_(*args):
 @builtinproc("contains?")
 def contains(x, y):
     return y in x
+
+@builtinproc("is?")
+def is_(x, y):
+    return x is y
 
 
 # ------------------

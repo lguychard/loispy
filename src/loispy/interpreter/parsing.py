@@ -1,5 +1,5 @@
 import re
-from symbol import Symbol, Sym, quotes, _dict
+from symbol import Symbol, Sym, quotes, _dict, _attr_access
 from utils import isa
 
 
@@ -62,8 +62,8 @@ def not_useless(tok):
 
 
 def tokenize(_str):
-    _str = re.sub(";.*\n", "", _str)
-    _str = re.sub("\s+$", "", _str)
+    _str = re.sub(";.*\n", "", _str) # remove comments
+    _str = re.sub("\s+$", "", _str) #remove trailing whitespace
     return getpos(filter(not_useless, split(_str)), _str)
 
 
@@ -128,6 +128,18 @@ def read_dict(node, tokens):
     tokens.pop(0)
     return node
 
+def read_attribute_access(node):
+    attributes = node.tok.split("/")
+    head = AstNode(_attr_access, node.line, node.start, node.end)
+    head.exp = _attr_access
+    node.exp = [head]
+    for a in attributes:
+        attrnode = AstNode(a, node.line, node.start, node.end)
+        # attribute names must be strings
+        attrnode.exp = a
+        node.exp.append(attrnode)
+    return node
+
 
 def read(tokens):
     """
@@ -152,6 +164,8 @@ def read(tokens):
             return read_list(node, tokens)
         elif "{" == node.tok:
             return read_dict(node, tokens)
+        elif "/"  in node.tok and node.tok != "/":
+            return read_attribute_access(node)
         elif node.tok in ["}", ")", "]", "["]:
             raise SyntaxError("Unexpected token: %s in %s" %
                                             (node.tok, [t[0] for t in tokens]))
